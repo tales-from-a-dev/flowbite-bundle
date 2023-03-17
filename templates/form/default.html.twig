@@ -67,7 +67,7 @@
     {%- if symbol -%}
         {%- set attr_class = 'rounded-none rounded-l-lg ' ~ block('class_input_text') -%}
         <div class="flex">
-            {% with { attr_class: attr_class } %}{{- block('form_widget_simple') -}}{% endwith %}
+            {%- with { attr_class: attr_class } -%}{{- block('form_widget_simple') -}}{%- endwith -%}
             <span class="{{ block('class_addon') ~ ' border-l-0 rounded-r-md' }}">{{ symbol|default('%') }}</span>
         </div>
     {%- else -%}
@@ -81,9 +81,9 @@
     {%- else -%}
         {%- set attr = attr|merge({class: attr.class|default('flex')|trim}) -%}
         {%- set attr_class_error = '' -%}
-        {% if not valid %}
+        {%- if not valid -%}
             {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
-        {% endif %}
+        {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
             {{- date_pattern|replace({
                 '{{ year }}':  form_widget(form.year, { attr: { class: ' rounded-none rounded-r-lg' ~ attr_class_error }}),
@@ -100,9 +100,9 @@
     {%- else -%}
         {%- set attr = attr|merge({class: attr.class|default('flex')|trim}) -%}
         {%- set attr_class_error = '' -%}
-        {% if not valid %}
+        {%- if not valid -%}
             {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
-        {% endif %}
+        {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
             {{- form_widget(form.hour, { attr: { class: (with_minutes or with_seconds ? ' rounded-none rounded-l-lg' : '') ~ attr_class_error }}) -}}
             {%- if with_minutes -%}
@@ -131,8 +131,8 @@
 
 {%- block form_label -%}
     {% if label is not same as(false) -%}
-        {%- set label_attr_class = label_attr.class|default('') ~ ' ' ~ (valid ? block('class_label') : block('class_label_error')) -%}
-        {%- set label_attr = label_attr|merge({'class': label_attr_class|trim}) -%}
+        {%- set label_attr_class = (valid ? block('class_label') : block('class_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
+        {%- set label_attr = label_attr|merge({class: label_attr_class|trim}) -%}
         {% if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {%- endif -%}
@@ -148,7 +148,7 @@
         {%- if checked and form.parent.vars.valid == false -%}
             {%- set valid = false -%}
         {%- endif -%}
-        {%- set label_attr_class = label_attr.class|default('') ~ ' ' ~ (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) -%}
+        {%- set label_attr_class = (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
         {%- set label_attr = label_attr|merge({'class': label_attr_class|trim}) -%}
         {%- if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
@@ -178,16 +178,16 @@
         {%- if checked and form.parent.vars.valid == false -%}
             {%- set valid = false -%}
         {%- endif -%}
-        {%- set label_attr_class = label_attr.class|default('') ~ ' ' ~ (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) -%}
-        {%- set label_attr = label_attr|merge({'class': 'relative inline-flex items-center cursor-pointer'}) -%}
+        {%- set label_attr_class = (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
+        {%- set label_attr = label_attr|merge({class: 'relative inline-flex items-center cursor-pointer'}) -%}
         {%- if not compound -%}
-            {% set label_attr = label_attr|merge({'for': id}) %}
+            {%- set label_attr = label_attr|merge({'for': id}) -%}
         {%- endif -%}
         <label{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}>
             {{ widget|raw }}
             <div class="{{ block('class_input_switch') }}"></div>
             {%- if label is not same as(false) -%}
-                <span class="{{ label_attr_class }}">
+                <span class="{{ label_attr_class|trim }}">
                     {{- block('form_label_content') -}}
                 </span>
             {%- endif -%}
@@ -199,7 +199,8 @@
 
 {% block form_help -%}
     {%- if help is not empty -%}
-        {%- set help_attr = help_attr|merge({class: help_attr.class|default(block('class_help_text'))|trim}) -%}
+        {%- set help_attr_class = (block('class_help_text') ~ ' '~ help_attr.class|default(''))|trim -%}
+        {%- set help_attr = help_attr|merge({class: help_attr_class}) -%}
         <p id="{{ id }}_help"{% with { attr: help_attr } %}{{ block('attributes') }}{% endwith %}>
             {{- block('form_help_content') -}}
         </p>
@@ -272,7 +273,7 @@
 {%- endblock class_input_checkbox %}
 
 {% block class_input_switch -%}
-    w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 dark:border-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-blue-600
+    w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 dark:border-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600
 {%- endblock class_input_switch %}
 
 {% block class_select -%}
@@ -296,7 +297,7 @@
 {%- endblock class_time_separator %}
 
 {% block class_addon -%}
-    inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300  dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600
+    inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600
 {%- endblock class_addon %}
 
 {% block class_help_text -%}
