@@ -16,6 +16,11 @@ The bulk of the documentation is stored in the [`docs`](docs/index.md) directory
     * [Prerequisites](docs/index.md#prerequisites)
     * [Installation](docs/index.md#installation)
     * [Configuration](docs/index.md#configuration)
+* [Theme customization](docs/theme_customization.md#theme-customization)
+    * [Overriding CSS classes](docs/theme_customization.md#overriding-css-classes)
+    * [Class block list](docs/theme_customization.md#class-block-list)
+* [Custom Form Types](docs/custom_form_types.md#custom-form-types)
+    * [SwitchType](docs/custom_form_types.md#switchtype)
 
 ## Credits
 
