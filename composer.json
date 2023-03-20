@@ -2,6 +2,14 @@
   "name": "tales-from-a-dev/flowbite-bundle",
   "description": "A Symfony form theme for Flowbite",
   "type": "symfony-bundle",
+  "keywords": [
+    "symfony",
+    "form",
+    "theme",
+    "bundle",
+    "flowbite"
+  ],
+  "homepage": "https://github.com/talesfromadev/flowbite-bundle",
   "license": "MIT",
   "authors": [
     {
