@@ -36,6 +36,7 @@ Update your Tailwind configuration file to include the `templates` folder of the
 
 ```js
 // tailwind.config.js
+
 module.exports = {
   content: [
     //...
@@ -61,9 +62,9 @@ twig:
 Finally, run the following command to compile the front-end assets via Webpack:
 
 ```bash
-    # With npm
-    npm run watch
-    
-    # With yarn
-    yarn watch
+# With npm
+npm run watch
+
+# With yarn
+yarn watch
 ```
