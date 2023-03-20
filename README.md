@@ -22,6 +22,13 @@ The bulk of the documentation is stored in the [`docs`](docs/index.md) directory
 * [Custom Form Types](docs/custom_form_types.md#custom-form-types)
     * [SwitchType](docs/custom_form_types.md#switchtype)
 
+## Screenshots
+
+| Default theme                                        | Dark theme                                        |
+|------------------------------------------------------|---------------------------------------------------|
+| ![Default theme](docs/screenshots/default.png)       | ![Default theme](docs/screenshots/dark.png)       |
+| ![Default theme](docs/screenshots/default_error.png) | ![Default theme](docs/screenshots/dark_error.png) |
+
 ## Credits
 
 * [Romain Monteil](https://github.com/ker0x)
