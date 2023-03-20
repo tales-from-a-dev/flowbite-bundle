@@ -4,33 +4,37 @@
 
 {%- block form_widget_simple -%}
     {%- set type = type|default('text') -%}
-    {%- set attr_class = attr_class|default('bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ') -%}
+    {%- set attr_class = attr_class|default(block('class_input_text')) -%}
     {%- if type == 'range' -%}
-        {%- set attr_class = 'w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 ' -%}
+        {%- set attr_class = block('class_input_range') -%}
     {%- elseif type == 'file' -%}
-        {%- set attr_class = 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 ' -%}
+        {%- set attr_class = block('class_input_file') -%}
     {%- endif -%}
     {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
     {{- parent() -}}
 {%- endblock form_widget_simple -%}
 
 {%- block textarea_widget -%}
-    {%- set attr = attr|merge({'class': ('block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ' ~ attr.class|default(''))|trim}) -%}
+    {%- set attr_class = attr_class|default(block('class_textarea')) -%}
+    {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
     {{- parent() -}}
 {%- endblock textarea_widget -%}
 
 {%- block choice_widget_collapsed -%}
-    {%- set attr = attr|merge({'class': ('bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ' ~ attr.class|default(''))|trim}) -%}
+    {%- set attr_class = attr_class|default(block('class_select')) -%}
+    {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
     {{- parent() -}}
 {%- endblock choice_widget_collapsed -%}
 
 {%- block checkbox_widget -%}
-    {%- set attr = attr|merge({'class': ('w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ' ~ attr.class|default(''))|trim}) -%}
+    {%- set attr_class = attr_class|default(block('class_input_checkbox')) -%}
+    {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
     {{- form_label(form, null, { widget: parent() }) -}}
 {%- endblock checkbox_widget -%}
 
 {%- block radio_widget -%}
-    {%- set attr = attr|merge({'class': ('w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ' ~ attr.class|default(''))|trim}) -%}
+    {%- set attr_class = attr_class|default(block('class_input_radio')) -%}
+    {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
     {{- form_label(form, null, { widget: parent() }) -}}
 {%- endblock radio_widget -%}
 
@@ -39,14 +43,14 @@
     {%- set append = not (money_pattern ends with '}}') -%}
     {%- if prepend or append -%}
         <div class="flex">
-            {%- set attr_class = 'rounded-none rounded-l-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ' -%}
+            {%- set attr_class = 'rounded-none rounded-l-lg ' ~ block('class_input_text') -%}
             {%- if prepend -%}
                 {%- set attr_class = attr_class|replace({'rounded-l-lg': 'rounded-r-lg'}) -%}
-                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">{{ money_pattern|form_encode_currency }}</span>
+                <span class="{{ block('class_addon') ~ ' border-r-0 rounded-l-md' }}">{{ money_pattern|form_encode_currency }}</span>
             {%- endif -%}
             {% with { attr_class: attr_class } %}{{- block('form_widget_simple') -}}{% endwith %}
             {%- if append -%}
-                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-l-0 border-gray-300 rounded-r-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">{{ money_pattern|form_encode_currency }}</span>
+                <span class="{{ block('class_addon') ~ ' border-l-0 rounded-r-md' }}">{{ money_pattern|form_encode_currency }}</span>
             {%- endif -%}
         </div>
     {%- else -%}
@@ -56,10 +60,10 @@
 
 {% block percent_widget -%}
     {%- if symbol -%}
-        {%- set attr_class = 'rounded-none rounded-l-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ' -%}
+        {%- set attr_class = 'rounded-none rounded-l-lg ' ~ block('class_input_text') -%}
         <div class="flex">
             {% with { attr_class: attr_class } %}{{- block('form_widget_simple') -}}{% endwith %}
-            <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-l-0 border-gray-300 rounded-r-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">{{ symbol|default('%') }}</span>
+            <span class="{{ block('class_addon') ~ ' border-l-0 rounded-r-md' }}">{{ symbol|default('%') }}</span>
         </div>
     {%- else -%}
         {{- block('form_widget_simple') -}}
@@ -71,11 +75,15 @@
         {{ block('form_widget_simple') }}
     {%- else -%}
         {%- set attr = attr|merge({class: attr.class|default('flex')|trim}) -%}
+        {%- set attr_class_error = '' -%}
+        {% if not valid %}
+            {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
+        {% endif %}
         <div {{ block('widget_container_attributes') }}>
             {{- date_pattern|replace({
-                '{{ year }}':  form_widget(form.year, { attr: { class: 'rounded-none rounded-r-lg' }}),
-                '{{ month }}': form_widget(form.month, { attr: { class: 'rounded-none rounded-l-lg' }}),
-                '{{ day }}':   form_widget(form.day, { attr: { class: 'rounded-none' }}),
+                '{{ year }}':  form_widget(form.year, { attr: { class: ' rounded-none rounded-r-lg' ~ attr_class_error }}),
+                '{{ month }}': form_widget(form.month, { attr: { class: ' rounded-none rounded-l-lg' ~ attr_class_error }}),
+                '{{ day }}':   form_widget(form.day, { attr: { class: ' rounded-none' ~ attr_class_error }}),
             })|raw -}}
         </div>
     {%- endif -%}
@@ -86,27 +94,31 @@
         {{ block('form_widget_simple') }}
     {%- else -%}
         {%- set attr = attr|merge({class: attr.class|default('flex')|trim}) -%}
+        {%- set attr_class_error = '' -%}
+        {% if not valid %}
+            {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
+        {% endif %}
         <div {{ block('widget_container_attributes') }}>
-            {{- form_widget(form.hour, { attr: { class: with_minutes or with_seconds ? 'rounded-none rounded-l-lg' : '' }}) -}}
+            {{- form_widget(form.hour, { attr: { class: (with_minutes or with_seconds ? ' rounded-none rounded-l-lg' : '') ~ attr_class_error }}) -}}
             {%- if with_minutes -%}
-                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-l-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">:</span>
-                {{- form_widget(form.minute, { attr: { class: with_seconds ? 'rounded-none' : 'rounded-none rounded-r-lg' }}) -}}
+                <span class="{{ block('class_time_separator') }}">:</span>
+                {{- form_widget(form.minute, { attr: { class: (with_seconds ? ' rounded-none' : ' rounded-none rounded-r-lg') ~ attr_class_error }}) -}}
             {%- endif -%}
             {%- if with_seconds -%}
-                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-l-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">:</span>
-                {{- form_widget(form.second, { attr: { class: 'rounded-none rounded-r-lg' }}) -}}
+                <span class="{{ block('class_time_separator') }}">:</span>
+                {{- form_widget(form.second, { attr: { class: ' rounded-none rounded-r-lg' ~ attr_class_error }}) -}}
             {%- endif -%}
         </div>
     {%- endif -%}
 {%- endblock time_widget -%}
 
 {%- block button_widget -%}
-    {%- set attr = attr|merge({class: (attr.class|default('text-gray-900 bg-white font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 border border-gray-200 hover:text-blue-700 hover:bg-gray-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700') ~ ' btn')|trim}) -%}
+    {%- set attr = attr|merge({class: (attr.class|default(block('class_button')))|trim}) -%}
     {{- parent() -}}
 {%- endblock button_widget %}
 
 {%- block submit_widget -%}
-    {%- set attr = attr|merge({class: (attr.class|default('text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'))|trim}) -%}
+    {%- set attr = attr|merge({class: (attr.class|default(block('class_submit')))|trim}) -%}
     {{- parent() -}}
 {%- endblock submit_widget %}
 
@@ -114,14 +126,12 @@
 
 {%- block form_label -%}
     {% if label is not same as(false) -%}
-        {%- set label_attr = label_attr|merge({'class': ('block mb-2 text-sm font-medium text-gray-900 dark:text-white ' ~ label_attr.class|default(''))|trim}) -%}
+        {%- set label_attr_class = label_attr.class|default('') ~ ' ' ~ (valid ? block('class_label') : block('class_label_error')) -%}
+        {%- set label_attr = label_attr|merge({'class': label_attr_class|trim}) -%}
         {% if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {%- endif -%}
-        {% if required -%}
-            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-        {%- endif -%}
-        <{{ element|default('label') }}{% if label_attr %}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}{% endif %}>
+        <{{ element|default('label') }}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}>
         {{- block('form_label_content') -}}
         </{{ element|default('label') }}>
     {%- endif -%}
@@ -130,11 +140,14 @@
 {%- block checkbox_radio_label -%}
     {#- Do not display the label if widget is not defined in order to prevent double label rendering -#}
     {%- if widget is defined -%}
-        {%- set label_attr = label_attr|merge({'class': ('ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 ' ~ label_attr.class|default(''))|trim}) -%}
+        {%- if checked and form.parent.vars.valid == false -%}
+            {%- set valid = false -%}
+        {%- endif -%}
+        {%- set label_attr_class = label_attr.class|default('') ~ ' ' ~ (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) -%}
+        {%- set label_attr = label_attr|merge({'class': label_attr_class|trim}) -%}
         {%- if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {%- endif -%}
-
         <div class="flex items-center mr-4">
             {{ widget|raw }}
             <label{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}>
@@ -158,7 +171,7 @@
 
 {% block form_help -%}
     {%- if help is not empty -%}
-        {%- set help_attr = help_attr|merge({class: ('mt-2 text-sm text-gray-500 dark:text-gray-400' ~ help_attr.class|default(''))|trim}) -%}
+        {%- set help_attr = help_attr|merge({class: help_attr.class|default(block('class_help_text'))|trim}) -%}
         <p id="{{ id }}_help"{% with { attr: help_attr } %}{{ block('attributes') }}{% endwith %}>
             {{- block('form_help_content') -}}
         </p>
@@ -186,7 +199,7 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
-            <p class="mt-2 text-sm text-red-500">{{ error.message }}</p>
+            <p class="{{ block('class_text_error') }}">{{ error.message }}</p>
         {%- endfor -%}
     {%- endif -%}
 {%- endblock form_errors -%}
@@ -195,7 +208,81 @@
 
 {%- block widget_attributes -%}
     {%- if not valid %}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' border-red-500 text-red-500 placeholder-red-500 focus:ring-red-500 focus:border-red-500')|trim}) %}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' ' ~ block('class_input_error'))|trim}) %}
     {% endif -%}
     {{ parent() }}
 {%- endblock widget_attributes -%}
+
+{# Class #}
+
+{% block class_label -%}
+    block mb-2 text-sm font-medium text-gray-900 dark:text-white
+{%- endblock class_label %}
+
+{% block class_input_radio_label -%}
+    ml-2 text-sm font-medium text-gray-900 dark:text-gray-300
+{%- endblock class_input_radio_label %}
+
+{% block class_input_text -%}
+    text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500
+{%- endblock class_input_text %}
+
+{% block class_input_range -%}
+    w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700
+{%- endblock class_input_range %}
+
+{% block class_input_file -%}
+    block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+{%- endblock class_input_file %}
+
+{% block class_input_radio -%}
+    w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600
+{%- endblock class_input_radio %}
+
+{% block class_input_checkbox -%}
+    rounded {{ block('class_input_radio') }}
+{%- endblock class_input_checkbox %}
+
+{% block class_select -%}
+    {{ block('class_input_text') }}
+{%- endblock class_select %}
+
+{% block class_textarea -%}
+    {{ block('class_input_text') }}
+{%- endblock class_textarea %}
+
+{% block class_button -%}
+    text-gray-900 bg-white font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 border border-gray-200 hover:text-blue-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700
+{%- endblock class_button %}
+
+{% block class_submit -%}
+    text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
+{%- endblock class_submit %}
+
+{% block class_time_separator -%}
+    inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-x-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600
+{%- endblock class_time_separator %}
+
+{% block class_addon -%}
+    inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300  dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600
+{%- endblock class_addon %}
+
+{% block class_help_text -%}
+    mt-2 text-sm text-gray-500 dark:text-gray-400
+{%- endblock class_help_text %}
+
+{% block class_label_error -%}
+    block mb-2 text-sm font-medium text-red-600 dark:text-red-500
+{%- endblock class_label_error %}
+
+{% block class_input_radio_label_error -%}
+    ml-2 text-sm font-medium text-red-600 dark:text-red-500
+{%- endblock class_input_radio_label_error %}
+
+{% block class_input_error -%}
+    text-red-900 bg-red-50 border-red-500 placeholder-red-700 dark:bg-red-100 dark:border-red-400 dark:text-red-900 focus:z-10 focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500
+{%- endblock class_input_error %}
+
+{% block class_text_error -%}
+    mt-2 text-sm text-red-600 dark:text-red-500
+{%- endblock class_text_error %}
