@@ -54,7 +54,7 @@ Update your Twig configuration located in `config/packages/twig.yaml` to use the
 
 twig:
   # ...
-  form_themes: ['@Flowbite/form/form_div_layout.html.twig']
+  form_themes: ['@Flowbite/form/default.html.twig']
 ```
 
 ### Run the watcher
