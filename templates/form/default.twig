@@ -38,6 +38,11 @@
     {{- form_label(form, null, { widget: parent() }) -}}
 {%- endblock radio_widget -%}
 
+{%- block switch_widget -%}
+    {%- set attr = attr|merge({'class': 'sr-only peer'}) -%}
+    {{- form_label(form, null, { widget: block('checkbox_widget', 'form_div_layout.html.twig') }) -}}
+{%- endblock switch_widget -%}
+
 {% block money_widget -%}
     {%- set prepend = not (money_pattern starts with '{{') -%}
     {%- set append = not (money_pattern ends with '}}') -%}
@@ -167,6 +172,29 @@
     {{- block('checkbox_radio_label') -}}
 {%- endblock radio_label %}
 
+{% block switch_label -%}
+    {#- Do not display the label if widget is not defined in order to prevent double label rendering -#}
+    {%- if widget is defined -%}
+        {%- if checked and form.parent.vars.valid == false -%}
+            {%- set valid = false -%}
+        {%- endif -%}
+        {%- set label_attr_class = label_attr.class|default('') ~ ' ' ~ (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) -%}
+        {%- set label_attr = label_attr|merge({'class': 'relative inline-flex items-center cursor-pointer'}) -%}
+        {%- if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif -%}
+        <label{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}>
+            {{ widget|raw }}
+            <div class="{{ block('class_input_switch') }}"></div>
+            {%- if label is not same as(false) -%}
+                <span class="{{ label_attr_class }}">
+                    {{- block('form_label_content') -}}
+                </span>
+            {%- endif -%}
+        </label>
+    {%- endif -%}
+{%- endblock switch_label %}
+
 {# Help #}
 
 {% block form_help -%}
@@ -242,6 +270,10 @@
 {% block class_input_checkbox -%}
     rounded {{ block('class_input_radio') }}
 {%- endblock class_input_checkbox %}
+
+{% block class_input_switch -%}
+    w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 dark:border-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-blue-600
+{%- endblock class_input_switch %}
 
 {% block class_select -%}
     {{ block('class_input_text') }}
