@@ -1,3 +1,5 @@
+/.coverage/
+/.phpunit.cache/
 /vendor/
-composer.lock
 .php-cs-fixer.cache
+composer.lock

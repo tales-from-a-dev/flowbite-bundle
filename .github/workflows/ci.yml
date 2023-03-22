@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  tests:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [ '8.2' ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: php-setup
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: xdebug
+
+      - name: composer-validate
+        run: composer validate
+
+      - name: composer-cache
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.php-version }}-composer-
+      - name: composer-install
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: php-cs-fixer
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --ansi
+
+      - name: phpunit
+        run: vendor/bin/phpunit
