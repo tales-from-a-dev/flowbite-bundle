@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TalesFromADev\FlowbiteBundle\Tests;
+namespace TalesFromADev\FlowbiteBundle\Tests\Fixtures;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
