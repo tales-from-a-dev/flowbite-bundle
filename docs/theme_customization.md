@@ -25,6 +25,16 @@ Now, just override the desire block with any Tailwind CSS class you want:
 {%- endblock class_submit %}
 ```
 
+Finally, don't forget to update your `twig` configuration to use your newly created template:
+
+```yaml
+# config/packages/twig.yaml
+
+twig:
+  # ...
+  form_themes: [ 'form/layout.html.twig' ]
+```
+
 ## Class block list
 
 Here is a list of all available class block:
