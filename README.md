@@ -1,9 +1,9 @@
 [![Tests](https://img.shields.io/github/actions/workflow/status/talesfromadev/flowbite-bundle/ci.yml?label=tests&style=for-the-badge)](https://github.com/talesfromadev/flowbite-bundle/actions/workflows/ci.yml)
 ![PHP Version](https://img.shields.io/badge/php->=8.2-4f5b93.svg?style=for-the-badge)
 ![Symfony Version](https://img.shields.io/badge/symfony->=6.2-000.svg?style=for-the-badge)
-![Flowbite Version](https://img.shields.io/badge/flowbite->=1.6-1c64f2.svg?style=for-the-badge)
-![Packagist Version](https://img.shields.io/packagist/v/tales-from-a-dev/flowbite-bundle?style=for-the-badge)
-![GitHub](https://img.shields.io/github/license/talesfromadev/flowbite-bundle?style=for-the-badge)
+[![Flowbite Version](https://img.shields.io/badge/flowbite->=1.6-1c64f2.svg?style=for-the-badge)](https://flowbite.com)
+[![Packagist Version](https://img.shields.io/packagist/v/tales-from-a-dev/flowbite-bundle?style=for-the-badge)](https://packagist.org/packages/tales-from-a-dev/flowbite-bundle)
+[![License](https://img.shields.io/github/license/talesfromadev/flowbite-bundle?style=for-the-badge)](https://github.com/tales-from-a-dev/flowbite-bundle/blob/main/LICENSE)
 
 # Flowbite bundle
 
