@@ -10,31 +10,31 @@
     {%- elseif type == 'file' -%}
         {%- set attr_class = block('class_input_file') -%}
     {%- endif -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
+    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
     {{- parent() -}}
 {%- endblock form_widget_simple -%}
 
 {%- block textarea_widget -%}
     {%- set attr_class = attr_class|default(block('class_textarea')) -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
+    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
     {{- parent() -}}
 {%- endblock textarea_widget -%}
 
 {%- block choice_widget_collapsed -%}
     {%- set attr_class = attr_class|default(block('class_select')) -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
+    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
     {{- parent() -}}
 {%- endblock choice_widget_collapsed -%}
 
 {%- block checkbox_widget -%}
     {%- set attr_class = attr_class|default(block('class_input_checkbox')) -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
+    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
     {{- form_label(form, null, { widget: parent() }) -}}
 {%- endblock checkbox_widget -%}
 
 {%- block radio_widget -%}
     {%- set attr_class = attr_class|default(block('class_input_radio')) -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ attr.class|default(''))|trim}) -%}
+    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
     {{- form_label(form, null, { widget: parent() }) -}}
 {%- endblock radio_widget -%}
 
@@ -86,9 +86,9 @@
         {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
             {{- date_pattern|replace({
-                '{{ year }}':  form_widget(form.year, { attr: { class: ' rounded-none rounded-r-lg' ~ attr_class_error }}),
-                '{{ month }}': form_widget(form.month, { attr: { class: ' rounded-none rounded-l-lg' ~ attr_class_error }}),
-                '{{ day }}':   form_widget(form.day, { attr: { class: ' rounded-none' ~ attr_class_error }}),
+                '{{ year }}':  form_widget(form.year, { attr: { class: 'rounded-none rounded-r-lg' ~ attr_class_error }}),
+                '{{ month }}': form_widget(form.month, { attr: { class: 'rounded-none rounded-l-lg' ~ attr_class_error }}),
+                '{{ day }}':   form_widget(form.day, { attr: { class: 'rounded-none' ~ attr_class_error }}),
             })|raw -}}
         </div>
     {%- endif -%}
@@ -104,14 +104,14 @@
             {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
         {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
-            {{- form_widget(form.hour, { attr: { class: (with_minutes or with_seconds ? ' rounded-none rounded-l-lg' : '') ~ attr_class_error }}) -}}
+            {{- form_widget(form.hour, { attr: { class: (with_minutes or with_seconds ? 'rounded-none rounded-l-lg' : '') ~ attr_class_error }}) -}}
             {%- if with_minutes -%}
                 <span class="{{ block('class_time_separator') }}">:</span>
-                {{- form_widget(form.minute, { attr: { class: (with_seconds ? ' rounded-none' : ' rounded-none rounded-r-lg') ~ attr_class_error }}) -}}
+                {{- form_widget(form.minute, { attr: { class: (with_seconds ? 'rounded-none' : 'rounded-none rounded-r-lg') ~ attr_class_error }}) -}}
             {%- endif -%}
             {%- if with_seconds -%}
                 <span class="{{ block('class_time_separator') }}">:</span>
-                {{- form_widget(form.second, { attr: { class: ' rounded-none rounded-r-lg' ~ attr_class_error }}) -}}
+                {{- form_widget(form.second, { attr: { class: 'rounded-none rounded-r-lg' ~ attr_class_error }}) -}}
             {%- endif -%}
         </div>
     {%- endif -%}
