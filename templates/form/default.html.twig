@@ -48,14 +48,14 @@
     {%- set append = not (money_pattern ends with '}}') -%}
     {%- if prepend or append -%}
         <div class="flex">
-            {%- set attr_class = 'rounded-none rounded-l-lg ' ~ block('class_input_text') -%}
+            {%- set attr_class = block('class_widget_addon_prepend') ~ ' ' ~ block('class_input_text') -%}
             {%- if prepend -%}
-                {%- set attr_class = attr_class|replace({'rounded-l-lg': 'rounded-r-lg'}) -%}
-                <span class="{{ block('class_addon') ~ ' border-r-0 rounded-l-md' }}">{{ money_pattern|form_encode_currency }}</span>
+                {%- set attr_class = block('class_widget_addon_append') ~ ' ' ~ block('class_input_text') -%}
+                <span class="{{ block('class_addon') ~ ' ' ~ block('class_addon_prepend') }}">{{ money_pattern|form_encode_currency }}</span>
             {%- endif -%}
             {% with { attr_class: attr_class } %}{{- block('form_widget_simple') -}}{% endwith %}
             {%- if append -%}
-                <span class="{{ block('class_addon') ~ ' border-l-0 rounded-r-md' }}">{{ money_pattern|form_encode_currency }}</span>
+                <span class="{{ block('class_addon') ~ ' ' ~ block('class_addon_append') }}">{{ money_pattern|form_encode_currency }}</span>
             {%- endif -%}
         </div>
     {%- else -%}
@@ -65,10 +65,10 @@
 
 {% block percent_widget -%}
     {%- if symbol -%}
-        {%- set attr_class = 'rounded-none rounded-l-lg ' ~ block('class_input_text') -%}
+        {%- set attr_class = block('class_widget_addon_prepend') ~ ' ' ~ block('class_input_text') -%}
         <div class="flex">
             {%- with { attr_class: attr_class } -%}{{- block('form_widget_simple') -}}{%- endwith -%}
-            <span class="{{ block('class_addon') ~ ' border-l-0 rounded-r-md' }}">{{ symbol|default('%') }}</span>
+            <span class="{{ block('class_addon') ~ ' ' ~ block('class_addon_append') }}">{{ symbol|default('%') }}</span>
         </div>
     {%- else -%}
         {{- block('form_widget_simple') -}}
@@ -86,8 +86,8 @@
         {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
             {{- date_pattern|replace({
-                '{{ year }}':  form_widget(form.year, { attr: { class: 'rounded-none rounded-r-lg' ~ attr_class_error }}),
-                '{{ month }}': form_widget(form.month, { attr: { class: 'rounded-none rounded-l-lg' ~ attr_class_error }}),
+                '{{ year }}':  form_widget(form.year, { attr: { class: block('class_widget_addon_append') ~ ' ' ~ attr_class_error }}),
+                '{{ month }}': form_widget(form.month, { attr: { class: block('class_widget_addon_prepend') ~ ' ' ~ attr_class_error }}),
                 '{{ day }}':   form_widget(form.day, { attr: { class: 'rounded-none' ~ attr_class_error }}),
             })|raw -}}
         </div>
@@ -104,14 +104,14 @@
             {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
         {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
-            {{- form_widget(form.hour, { attr: { class: (with_minutes or with_seconds ? 'rounded-none rounded-l-lg' : '') ~ attr_class_error }}) -}}
+            {{- form_widget(form.hour, { attr: { class: (with_minutes or with_seconds ? block('class_widget_addon_prepend') : '') ~ attr_class_error }}) -}}
             {%- if with_minutes -%}
                 <span class="{{ block('class_time_separator') }}">:</span>
-                {{- form_widget(form.minute, { attr: { class: (with_seconds ? 'rounded-none' : 'rounded-none rounded-r-lg') ~ attr_class_error }}) -}}
+                {{- form_widget(form.minute, { attr: { class: (with_seconds ? 'rounded-none' : block('class_widget_addon_append')) ~ attr_class_error }}) -}}
             {%- endif -%}
             {%- if with_seconds -%}
                 <span class="{{ block('class_time_separator') }}">:</span>
-                {{- form_widget(form.second, { attr: { class: 'rounded-none rounded-r-lg' ~ attr_class_error }}) -}}
+                {{- form_widget(form.second, { attr: { class: block('class_widget_addon_append') ~ attr_class_error }}) -}}
             {%- endif -%}
         </div>
     {%- endif -%}
@@ -179,7 +179,7 @@
             {%- set valid = false -%}
         {%- endif -%}
         {%- set label_attr_class = (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
-        {%- set label_attr = label_attr|merge({class: 'relative inline-flex items-center cursor-pointer'}) -%}
+        {%- set label_attr = label_attr|merge({class: block('class_input_switch_label')}) -%}
         {%- if not compound -%}
             {%- set label_attr = label_attr|merge({'for': id}) -%}
         {%- endif -%}
@@ -252,6 +252,10 @@
     ml-2 text-sm font-medium text-gray-900 dark:text-gray-300
 {%- endblock class_input_radio_label %}
 
+{% block class_input_switch_label -%}
+    relative inline-flex items-center cursor-pointer
+{%- endblock class_input_switch_label %}
+
 {% block class_input_text -%}
     text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500
 {%- endblock class_input_text %}
@@ -299,6 +303,22 @@
 {% block class_addon -%}
     inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600
 {%- endblock class_addon %}
+
+{% block class_widget_addon_prepend -%}
+    rounded-none rounded-l-lg
+{%- endblock class_widget_addon_prepend %}
+
+{% block class_widget_addon_append -%}
+    rounded-none rounded-r-lg
+{%- endblock class_widget_addon_append %}
+
+{% block class_addon_prepend -%}
+    border-r-0 rounded-l-md
+{%- endblock class_addon_prepend %}
+
+{% block class_addon_append -%}
+    border-l-0 rounded-r-md
+{%- endblock class_addon_append %}
 
 {% block class_help_text -%}
     mt-2 text-sm text-gray-500 dark:text-gray-400
