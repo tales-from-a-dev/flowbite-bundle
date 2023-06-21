@@ -42,6 +42,7 @@ Here is a list of all available class block:
 * Label
   * class_label
   * class_input_radio_label
+  * class_input_switch_label
 * Input
   * class_input_text
   * class_input_range
@@ -59,6 +60,10 @@ Here is a list of all available class block:
 * Various
   * class_time_separator
   * class_addon
+  * class_widget_addon_prepend
+  * class_widget_addon_append
+  * class_addon_prepend
+  * class_addon_append
   * class_help_text
 * Error
   * class_label_error
