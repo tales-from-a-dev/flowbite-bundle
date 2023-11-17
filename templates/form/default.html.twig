@@ -86,9 +86,9 @@
         {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
             {{- date_pattern|replace({
-                '{{ year }}':  form_widget(form.year, { attr: { class: block('class_widget_addon_append') ~ ' ' ~ attr_class_error }}),
-                '{{ month }}': form_widget(form.month, { attr: { class: block('class_widget_addon_prepend') ~ ' ' ~ attr_class_error }}),
-                '{{ day }}':   form_widget(form.day, { attr: { class: 'rounded-none' ~ attr_class_error }}),
+                '{{ year }}':  form_widget(form.year, { attr: { class: (block('class_widget_addon_append') ~ ' ' ~ attr_class_error|trim|tailwind_merge) }}),
+                '{{ month }}': form_widget(form.month, { attr: { class: (block('class_widget_addon_prepend') ~ ' ' ~ attr_class_error|trim|tailwind_merge) }}),
+                '{{ day }}':   form_widget(form.day, { attr: { class: ('rounded-none' ~ attr_class_error)|trim|tailwind_merge }}),
             })|raw -}}
         </div>
     {%- endif -%}
@@ -104,14 +104,14 @@
             {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
         {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
-            {{- form_widget(form.hour, { attr: { class: (with_minutes or with_seconds ? block('class_widget_addon_prepend') : '') ~ attr_class_error }}) -}}
+            {{- form_widget(form.hour, { attr: { class: ((with_minutes or with_seconds ? block('class_widget_addon_prepend') : '') ~ attr_class_error)|trim|tailwind_merge }}) -}}
             {%- if with_minutes -%}
                 <span class="{{ block('class_time_separator') }}">:</span>
-                {{- form_widget(form.minute, { attr: { class: (with_seconds ? 'rounded-none' : block('class_widget_addon_append')) ~ attr_class_error }}) -}}
+                {{- form_widget(form.minute, { attr: { class: ((with_seconds ? 'rounded-none' : block('class_widget_addon_append')) ~ attr_class_error|trim|tailwind_merge) }}) -}}
             {%- endif -%}
             {%- if with_seconds -%}
                 <span class="{{ block('class_time_separator') }}">:</span>
-                {{- form_widget(form.second, { attr: { class: block('class_widget_addon_append') ~ attr_class_error }}) -}}
+                {{- form_widget(form.second, { attr: { class: (block('class_widget_addon_append') ~ attr_class_error)|trim|tailwind_merge }}) -}}
             {%- endif -%}
         </div>
     {%- endif -%}
@@ -132,7 +132,7 @@
 {%- block form_label -%}
     {% if label is not same as(false) -%}
         {%- set label_attr_class = (valid ? block('class_label') : block('class_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
-        {%- set label_attr = label_attr|merge({class: label_attr_class|trim}) -%}
+        {%- set label_attr = label_attr|merge({class: label_attr_class|trim|tailwind_merge}) -%}
         {% if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {%- endif -%}
@@ -149,7 +149,7 @@
             {%- set valid = false -%}
         {%- endif -%}
         {%- set label_attr_class = (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
-        {%- set label_attr = label_attr|merge({'class': label_attr_class|trim}) -%}
+        {%- set label_attr = label_attr|merge({'class': label_attr_class|trim|tailwind_merge}) -%}
         {%- if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {%- endif -%}
@@ -237,7 +237,8 @@
 
 {%- block widget_attributes -%}
     {%- if not valid %}
-        {% set attr = attr|merge({class: (attr.class|default('') ~ ' ' ~ block('class_input_error'))|trim}) %}
+        {%- set attr_class = attr.class|default('') ~ ' ' ~ block('class_input_error') -%}
+        {%- set attr = attr|merge({class: attr_class|trim|tailwind_merge}) -%}
     {% endif -%}
     {{ parent() }}
 {%- endblock widget_attributes -%}
