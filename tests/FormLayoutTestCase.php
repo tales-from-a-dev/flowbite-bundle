@@ -12,6 +12,8 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use TalesFromADev\FlowbiteBundle\Tests\Fixtures\StubTranslator;
+use TalesFromADev\Twig\Extra\Tailwind\TailwindExtension;
+use TalesFromADev\Twig\Extra\Tailwind\TailwindRuntime;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\RuntimeLoader\RuntimeLoaderInterface;
@@ -32,6 +34,7 @@ abstract class FormLayoutTestCase extends FormIntegrationTestCase
         $environment = new Environment($loader, ['strict_variables' => true]);
         $environment->addExtension(new TranslationExtension(new StubTranslator()));
         $environment->addExtension(new FormExtension());
+        $environment->addExtension(new TailwindExtension());
 
         $rendererEngine = new TwigRendererEngine([
             'default.html.twig',
@@ -67,11 +70,16 @@ abstract class FormLayoutTestCase extends FormIntegrationTestCase
 
     private function registerTwigRuntimeLoader(Environment $environment, FormRenderer $renderer): void
     {
-        $loader = $this->createMock(RuntimeLoaderInterface::class);
-        $loader->expects($this->any())->method('load')->willReturnMap([
+        $formRendererLoader = $this->createMock(RuntimeLoaderInterface::class);
+        $formRendererLoader->expects($this->any())->method('load')->willReturnMap([
             [FormRenderer::class, $renderer],
         ]);
-        $environment->addRuntimeLoader($loader);
+
+        $tailwindLoader = $this->createMock(RuntimeLoaderInterface::class);
+        $tailwindLoader->expects($this->any())->method('load')->willReturn(new TailwindRuntime());
+
+        $environment->addRuntimeLoader($formRendererLoader);
+        $environment->addRuntimeLoader($tailwindLoader);
     }
 
     protected function assertMatchesXpath(string $html, string $expression, int $count = 1): void
