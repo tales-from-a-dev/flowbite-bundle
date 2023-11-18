@@ -17,7 +17,7 @@ composer require tales-from-a-dev/flowbite-bundle
 
 ### Register the bundle
 
-If you are using Symfony Flex, this is done automatically, otherwise register the bundle into `config/bundles.php`. :
+If you are using Symfony Flex, this is done automatically, otherwise register the bundle into `config/bundles.php`:
 
 ```php
 // config/bundles.php
