@@ -11,9 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\FormError;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class SelectLayoutTest extends FormLayoutTestCase
+final class SelectLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     #[DataProvider('selectProvider')]
     public function testSelect(string $classType): void

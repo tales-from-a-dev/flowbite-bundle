@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class SubmitLayoutTest extends FormLayoutTestCase
+final class SubmitLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testSubmit(): void
     {

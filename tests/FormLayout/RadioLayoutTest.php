@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class RadioLayoutTest extends FormLayoutTestCase
+final class RadioLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testRadio(): void
     {

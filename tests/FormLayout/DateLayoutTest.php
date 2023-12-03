@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class DateLayoutTest extends FormLayoutTestCase
+final class DateLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testDate(): void
     {
         $form = $this->factory->createNamed('date', DateType::class, date('Y').'-02-03', [
             'input' => 'string',
+            'widget' => 'choice',
         ]);
 
         $this->assertWidgetMatchesXpath($form->createView(), [],

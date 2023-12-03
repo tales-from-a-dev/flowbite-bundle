@@ -227,8 +227,8 @@
 
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
-        {%- for error in errors -%}
-            <p class="{{ block('class_text_error') }}">{{ error.message }}</p>
+        {%- for key, error in errors -%}
+            <p id="{{ id }}_error_{{ key }}" class="{{ block('class_text_error') }}">{{ error.message }}</p>
         {%- endfor -%}
     {%- endif -%}
 {%- endblock form_errors -%}

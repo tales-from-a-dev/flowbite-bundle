@@ -15,9 +15,9 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormError;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class TextLayoutTest extends FormLayoutTestCase
+final class TextLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     #[DataProvider('inputProvider')]
     public function testInput(string $classType, mixed $data, string $inputType): void
@@ -63,6 +63,7 @@ final class TextLayoutTest extends FormLayoutTestCase
 
         $this->assertMatchesXpath($html,
             '/p
+                [@id="name_error_0"]
                 [@class="mt-2 text-sm text-red-600 dark:text-red-500"]
                 [.="[trans]Error message[/trans]"]
             '
