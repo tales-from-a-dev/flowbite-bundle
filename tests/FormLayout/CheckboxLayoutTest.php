@@ -6,9 +6,9 @@ namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormError;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class CheckboxLayoutTest extends FormLayoutTestCase
+final class CheckboxLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testCheckbox(): void
     {

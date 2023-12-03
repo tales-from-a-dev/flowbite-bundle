@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class TimeLayoutTest extends FormLayoutTestCase
+final class TimeLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testTime(): void
     {
         $form = $this->factory->createNamed('name', TimeType::class, '04:05:06', [
             'input' => 'string',
             'with_seconds' => false,
+            'widget' => 'choice',
         ]);
 
         $this->assertWidgetMatchesXpath($form->createView(), [],
@@ -55,6 +56,7 @@ final class TimeLayoutTest extends FormLayoutTestCase
         $form = $this->factory->createNamed('name', TimeType::class, '04:05:06', [
             'input' => 'string',
             'with_seconds' => true,
+            'widget' => 'choice',
         ]);
 
         $this->assertWidgetMatchesXpath($form->createView(), [],

@@ -6,9 +6,9 @@ namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormError;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class SupportLayoutTest extends FormLayoutTestCase
+final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testLabel(): void
     {

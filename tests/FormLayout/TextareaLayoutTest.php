@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class TextareaLayoutTest extends FormLayoutTestCase
+final class TextareaLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testTextarea(): void
     {

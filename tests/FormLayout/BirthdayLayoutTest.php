@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class BirthdayLayoutTest extends FormLayoutTestCase
+final class BirthdayLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testBirthDay(): void
     {
         $form = $this->factory->createNamed('birthday', BirthdayType::class, '2000-02-03', [
             'input' => 'string',
+            'widget' => 'choice',
         ]);
 
         $this->assertWidgetMatchesXpath($form->createView(), [],

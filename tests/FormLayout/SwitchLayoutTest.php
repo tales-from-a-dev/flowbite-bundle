@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use TalesFromADev\FlowbiteBundle\Form\Type\SwitchType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class SwitchLayoutTest extends FormLayoutTestCase
+final class SwitchLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testSwitch(): void
     {

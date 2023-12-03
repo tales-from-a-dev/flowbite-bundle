@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class ChoiceLayoutTest extends FormLayoutTestCase
+final class ChoiceLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testChoice(): void
     {

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\WeekType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class WeekLayoutTest extends FormLayoutTestCase
+final class WeekLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testWeek(): void
     {

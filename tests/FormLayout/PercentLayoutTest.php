@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class PercentLayoutTest extends FormLayoutTestCase
+final class PercentLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testPercent(): void
     {

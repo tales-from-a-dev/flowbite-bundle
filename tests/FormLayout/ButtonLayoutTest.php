@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use TalesFromADev\FlowbiteBundle\Tests\FormLayoutTestCase;
+use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
-final class ButtonLayoutTest extends FormLayoutTestCase
+final class ButtonLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
     public function testButton(): void
     {
