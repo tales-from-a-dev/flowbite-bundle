@@ -55,8 +55,9 @@ Update your Twig configuration located in `config/packages/twig.yaml` to use the
 # config/packages/twig.yaml
 
 twig:
-  # ...
-  form_themes: ['@Flowbite/form/default.html.twig']
+    # ...
+    form_themes: 
+        - '@TalesFromADevFlowbite/form/default.html.twig'
 ```
 
 ## Run the watcher
