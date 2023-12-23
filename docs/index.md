@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-This bundle requires **PHP 8.2+**, **Symfony 6.2+** and **Flowbite 1.6+**.
+This bundle requires **PHP 8.2+**, **Symfony 6.4+** and **Flowbite 1.6+**.
 
 ## Installation
 
@@ -15,20 +15,22 @@ to your ``composer.json`` file:
 composer require tales-from-a-dev/flowbite-bundle
 ```
 
+## Register and configure the bundle
+
+If you are using Symfony Flex, the following steps should be done automatically. Otherwise, follow the instructions.
+
 ### Register the bundle
 
-If you are using Symfony Flex, this is done automatically, otherwise register the bundle into `config/bundles.php`:
+Inside `config/bundles.php`, add the following line:
 
 ```php
 // config/bundles.php
     
 return [
     // ...
-    TalesFromADev\FlowbiteBundle\FlowbiteBundle::class => ['all' => true],
+    TalesFromADev\FlowbiteBundle\TalesFromADevFlowbiteBundle::class => ['all' => true],
 ];
 ```
-
-## Configuration
 
 ### Configuring Tailwind CSS
 
@@ -57,7 +59,7 @@ twig:
   form_themes: ['@Flowbite/form/default.html.twig']
 ```
 
-### Run the watcher
+## Run the watcher
 
 Finally, run the following command to compile the front-end assets via Webpack:
 
