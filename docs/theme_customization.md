@@ -10,7 +10,7 @@ Create a new theme in your `templates` directory and make it use the bundle `def
 ```php
 # templates/form/layout.html.twig
 
-{% use '@Flowbite/form/default.html.twig' %}
+{% use '@TalesFromADevFlowbite/form/default.html.twig' %}
 ```
 
 Now, just override the desire block with any Tailwind CSS class you want:
@@ -18,7 +18,7 @@ Now, just override the desire block with any Tailwind CSS class you want:
 ```php
 # templates/form/layout.html.twig
 
-{% use '@Flowbite/form/default.html.twig' %}
+{% use '@TalesFromADevFlowbite/form/default.html.twig' %}
 
 {% block class_submit -%}
     # use any Tailwind CSS class you want ...
@@ -31,8 +31,9 @@ Finally, don't forget to update your `twig` configuration to use your newly crea
 # config/packages/twig.yaml
 
 twig:
-  # ...
-  form_themes: [ 'form/layout.html.twig' ]
+    # ...
+    form_themes:
+        - 'form/layout.html.twig'
 ```
 
 ## Class block list
