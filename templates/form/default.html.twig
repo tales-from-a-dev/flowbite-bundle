@@ -4,14 +4,18 @@
 
 {%- block form_widget_simple -%}
     {%- set type = type|default('text') -%}
-    {%- set attr_class = attr_class|default(block('class_input_text')) -%}
-    {%- if type == 'range' -%}
-        {%- set attr_class = block('class_input_range') -%}
-    {%- elseif type == 'file' -%}
-        {%- set attr_class = block('class_input_file') -%}
+    {%- if type == 'hidden' -%}
+        {{- parent() -}}
+    {%- else -%}
+        {%- set attr_class = attr_class|default(block('class_input_text')) -%}
+        {%- if type == 'range' -%}
+            {%- set attr_class = block('class_input_range') -%}
+        {%- elseif type == 'file' -%}
+            {%- set attr_class = block('class_input_file') -%}
+        {%- endif -%}
+        {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
+        {{- parent() -}}
     {%- endif -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
-    {{- parent() -}}
 {%- endblock form_widget_simple -%}
 
 {%- block textarea_widget -%}
