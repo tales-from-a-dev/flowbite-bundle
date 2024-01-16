@@ -9,7 +9,7 @@ use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
 final class BirthdayLayoutTest extends AbstractFlowbiteLayoutTestCase
 {
-    public function testBirthDay(): void
+    public function testBirthday(): void
     {
         $form = $this->factory->createNamed('birthday', BirthdayType::class, '2000-02-03', [
             'input' => 'string',
@@ -54,7 +54,7 @@ final class BirthdayLayoutTest extends AbstractFlowbiteLayoutTestCase
         );
     }
 
-    public function testBirthDaySingleText(): void
+    public function testBirthdaySingleText(): void
     {
         $form = $this->factory->createNamed('birthday', BirthdayType::class, '2000-02-03', [
             'input' => 'string',
