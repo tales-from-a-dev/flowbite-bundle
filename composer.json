@@ -44,5 +44,10 @@
     "psr-4": {
       "TalesFromADev\\FlowbiteBundle\\Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "cs": "vendor/bin/php-cs-fixer fix -v --dry-run",
+    "cs:fix": "vendor/bin/php-cs-fixer fix -v",
+    "test": "vendor/bin/phpunit"
   }
 }

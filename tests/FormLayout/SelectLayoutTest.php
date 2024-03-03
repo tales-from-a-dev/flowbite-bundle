@@ -43,7 +43,7 @@ final class SelectLayoutTest extends AbstractFlowbiteLayoutTestCase
             '/select
                 [@name="name"]
                 [@id="name"]
-                [@class="rounded-lg text-sm block w-full p-2.5 border dark:placeholder-gray-400 text-red-900 bg-red-50 border-red-500 placeholder-red-700 dark:bg-red-100 dark:border-red-400 dark:text-red-900 focus:z-10 focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500"]
+                [@class="rounded-lg text-sm block w-full p-2.5 border bg-red-50 border-red-500 text-red-900 placeholder-red-700 dark:bg-red-100 dark:border-red-500 dark:text-red-500 dark:placeholder-red-500 focus:z-10 focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500"]
             '
         );
     }
