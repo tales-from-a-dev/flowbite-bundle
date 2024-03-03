@@ -52,9 +52,9 @@
     {%- set append = not (money_pattern ends with '}}') -%}
     {%- if prepend or append -%}
         <div class="flex">
-            {%- set attr_class = block('class_widget_addon_prepend') ~ ' ' ~ block('class_input_text') -%}
+            {%- set attr_class = block('class_input_text') ~ ' ' ~ block('class_widget_addon_prepend') -%}
             {%- if prepend -%}
-                {%- set attr_class = block('class_widget_addon_append') ~ ' ' ~ block('class_input_text') -%}
+                {%- set attr_class = block('class_input_text') ~ ' ' ~ block('class_widget_addon_append') -%}
                 <span class="{{ block('class_addon') ~ ' ' ~ block('class_addon_prepend') }}">{{ money_pattern|form_encode_currency }}</span>
             {%- endif -%}
             {% with { attr_class: attr_class } %}{{- block('form_widget_simple') -}}{% endwith %}
@@ -69,7 +69,7 @@
 
 {% block percent_widget -%}
     {%- if symbol -%}
-        {%- set attr_class = block('class_widget_addon_prepend') ~ ' ' ~ block('class_input_text') -%}
+        {%- set attr_class = block('class_input_text') ~ ' ' ~ block('class_widget_addon_prepend') -%}
         <div class="flex">
             {%- with { attr_class: attr_class } -%}{{- block('form_widget_simple') -}}{%- endwith -%}
             <span class="{{ block('class_addon') ~ ' ' ~ block('class_addon_append') }}">{{ symbol|default('%') }}</span>
@@ -240,10 +240,14 @@
 {# Support #}
 
 {%- block widget_attributes -%}
+    {%- set attr_class = attr.class|default('') -%}
     {%- if not valid %}
-        {%- set attr_class = attr.class|default('') ~ ' ' ~ block('class_input_error') -%}
-        {%- set attr = attr|merge({class: attr_class|trim|tailwind_merge}) -%}
+        {%- set attr_class = attr_class ~ ' ' ~ block('class_input_error') -%}
     {% endif -%}
+    {%- if disabled %}
+        {%- set attr_class = attr_class ~ ' ' ~ block('class_input_disabled') -%}
+    {% endif -%}
+    {%- set attr = attr|merge({class: attr_class|trim|tailwind_merge}) -%}
     {{ parent() }}
 {%- endblock widget_attributes -%}
 
@@ -344,3 +348,7 @@
 {% block class_text_error -%}
     mt-2 text-sm text-red-600 dark:text-red-500
 {%- endblock class_text_error %}
+
+{% block class_input_disabled -%}
+    disabled:bg-gray-100 disabled:border-gray-300 disabled:cursor-not-allowed dark:disabled:text-gray-400
+{%- endblock class_input_disabled %}

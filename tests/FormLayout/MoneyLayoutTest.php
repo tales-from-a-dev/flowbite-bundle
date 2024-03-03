@@ -25,7 +25,7 @@ final class MoneyLayoutTest extends AbstractFlowbiteLayoutTestCase
                         [@type="text"]
                         [@name="name"]
                         [@id="name"]
-                        [@class="rounded-none rounded-r-lg text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                        [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-r-lg"]
                         [@value="1234.56"]
                 ]
             '
