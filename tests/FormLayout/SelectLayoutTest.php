@@ -48,6 +48,26 @@ final class SelectLayoutTest extends AbstractFlowbiteLayoutTestCase
         );
     }
 
+    #[DataProvider('selectProvider')]
+    public function testSelectDisabled(string $classType): void
+    {
+        $form = $this->factory->createNamed('name', $classType, 'foo', [
+            'multiple' => false,
+            'expanded' => false,
+            'disabled' => true,
+        ]);
+        $form->submit([]);
+
+        $this->assertWidgetMatchesXpath($form->createView(), [],
+            '/select
+                [@name="name"]
+                [@id="name"]
+                [@disabled="disabled"]
+                [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-gray-100 disabled:border-gray-300 disabled:cursor-not-allowed dark:disabled:text-gray-400"]
+            '
+        );
+    }
+
     public static function selectProvider(): \Generator
     {
         yield CountryType::class => [CountryType::class];

@@ -55,6 +55,24 @@ final class TextLayoutTest extends AbstractFlowbiteLayoutTestCase
         ));
     }
 
+    #[DataProvider('inputProvider')]
+    public function testInputDisabled(string $classType, mixed $data, string $inputType): void
+    {
+        $form = $this->factory->createNamed('name', $classType, $data, ['disabled' => true]);
+        $form->submit([]);
+
+        $this->assertWidgetMatchesXpath($form->createView(), [], sprintf(
+            '/input
+                [@type="%s"]
+                [@name="name"]
+                [@id="name"]
+                [@disabled="disabled"]
+                [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:bg-gray-100 disabled:border-gray-300 disabled:cursor-not-allowed dark:disabled:text-gray-400"]
+            ',
+            $inputType,
+        ));
+    }
+
     public function testTextError(): void
     {
         $form = $this->factory->createNamed('name', TextType::class);
