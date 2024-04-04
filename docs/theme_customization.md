@@ -44,6 +44,7 @@ Here is a list of all available class block:
   * class_label
   * class_input_radio_label
   * class_input_switch_label
+  * class_input_switch_label_container
 * Input
   * class_input_text
   * class_input_range
@@ -69,5 +70,8 @@ Here is a list of all available class block:
 * Error
   * class_label_error
   * class_input_radio_label_error
+  * class_input_switch_label_error
   * class_input_error
   * class_text_error
+* Disabled
+  * class_input_disabled 
