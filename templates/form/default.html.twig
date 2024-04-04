@@ -83,7 +83,7 @@
     {%- if widget == 'single_text' -%}
         {{ block('form_widget_simple') }}
     {%- else -%}
-        {%- set attr = attr|merge({class: attr.class|default('flex')|trim}) -%}
+        {%- set attr = attr|merge({'class': attr.class|default('flex')|trim}) -%}
         {%- set attr_class_error = '' -%}
         {%- if not valid -%}
             {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
@@ -102,7 +102,7 @@
     {%- if widget == 'single_text' -%}
         {{ block('form_widget_simple') }}
     {%- else -%}
-        {%- set attr = attr|merge({class: attr.class|default('flex')|trim}) -%}
+        {%- set attr = attr|merge({'class': attr.class|default('flex')|trim}) -%}
         {%- set attr_class_error = '' -%}
         {%- if not valid -%}
             {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
@@ -122,12 +122,12 @@
 {%- endblock time_widget -%}
 
 {%- block button_widget -%}
-    {%- set attr = attr|merge({class: (attr.class|default(block('class_button')))|trim}) -%}
+    {%- set attr = attr|merge({'class': (attr.class|default(block('class_button')))|trim}) -%}
     {{- parent() -}}
 {%- endblock button_widget %}
 
 {%- block submit_widget -%}
-    {%- set attr = attr|merge({class: (attr.class|default(block('class_submit')))|trim}) -%}
+    {%- set attr = attr|merge({'class': (attr.class|default(block('class_submit')))|trim}) -%}
     {{- parent() -}}
 {%- endblock submit_widget %}
 
@@ -136,7 +136,7 @@
 {%- block form_label -%}
     {% if label is not same as(false) -%}
         {%- set label_attr_class = (valid ? block('class_label') : block('class_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
-        {%- set label_attr = label_attr|merge({class: label_attr_class|trim|tailwind_merge}) -%}
+        {%- set label_attr = label_attr|merge({'class': label_attr_class|trim|tailwind_merge}) -%}
         {% if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {%- endif -%}
@@ -182,16 +182,18 @@
         {%- if checked and form.parent.vars.valid == false -%}
             {%- set valid = false -%}
         {%- endif -%}
-        {%- set label_attr_class = (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
-        {%- set label_attr = label_attr|merge({class: block('class_input_switch_label')}) -%}
+        {%- set label_attr_class = (valid ? block('class_input_switch_label') : block('class_input_switch_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
+        {%- set label_container_attr_class = block('class_input_switch_label_container') ~ ' ' ~ label_container_attr.class|default('') -%}
+        {%- set label_attr = label_attr|merge({'class': label_attr_class|trim|tailwind_merge})  -%}
+        {%- set label_container_attr = label_container_attr|merge({'class': label_container_attr_class|trim|tailwind_merge}) -%}
         {%- if not compound -%}
-            {%- set label_attr = label_attr|merge({'for': id}) -%}
+            {%- set label_container_attr = label_container_attr|merge({'for': id}) -%}
         {%- endif -%}
-        <label{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}>
+        <label{% with { attr: label_container_attr } %}{{ block('attributes') }}{% endwith %}>
             {{ widget|raw }}
             <div class="{{ block('class_input_switch') }}"></div>
             {%- if label is not same as(false) -%}
-                <span class="{{ label_attr_class|trim }}">
+                <span{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}>
                     {{- block('form_label_content') -}}
                 </span>
             {%- endif -%}
@@ -204,7 +206,7 @@
 {% block form_help -%}
     {%- if help is not empty -%}
         {%- set help_attr_class = (block('class_help_text') ~ ' '~ help_attr.class|default(''))|trim -%}
-        {%- set help_attr = help_attr|merge({class: help_attr_class}) -%}
+        {%- set help_attr = help_attr|merge({'class': help_attr_class}) -%}
         <p id="{{ id }}_help"{% with { attr: help_attr } %}{{ block('attributes') }}{% endwith %}>
             {{- block('form_help_content') -}}
         </p>
@@ -247,7 +249,7 @@
     {%- if disabled %}
         {%- set attr_class = attr_class ~ ' ' ~ block('class_input_disabled') -%}
     {% endif -%}
-    {%- set attr = attr|merge({class: attr_class|trim|tailwind_merge}) -%}
+    {%- set attr = attr|merge({'class': attr_class|trim|tailwind_merge}) -%}
     {{ parent() }}
 {%- endblock widget_attributes -%}
 
@@ -262,8 +264,12 @@
 {%- endblock class_input_radio_label %}
 
 {% block class_input_switch_label -%}
-    relative inline-flex items-center cursor-pointer
+    {{ block('class_input_radio_label') }}
 {%- endblock class_input_switch_label %}
+
+{% block class_input_switch_label_container -%}
+    relative inline-flex items-center cursor-pointer
+{%- endblock class_input_switch_label_container %}
 
 {% block class_input_text -%}
     text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500
@@ -286,7 +292,7 @@
 {%- endblock class_input_checkbox %}
 
 {% block class_input_switch -%}
-    w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 dark:border-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600
+    relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 dark:border-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600
 {%- endblock class_input_switch %}
 
 {% block class_select -%}
@@ -340,6 +346,10 @@
 {% block class_input_radio_label_error -%}
     ml-2 text-sm font-medium text-red-600 dark:text-red-500
 {%- endblock class_input_radio_label_error %}
+
+{% block class_input_switch_label_error -%}
+    {{ block('class_input_radio_label_error') }}
+{%- endblock class_input_switch_label_error %}
 
 {% block class_input_error -%}
     bg-red-50 border-red-500 text-red-900 placeholder-red-700 dark:bg-red-100 dark:border-red-500 dark:text-red-500 dark:placeholder-red-500 focus:z-10 focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500
