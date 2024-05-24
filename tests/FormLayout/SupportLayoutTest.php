@@ -18,6 +18,20 @@ final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertMatchesXpath($html,
             '/label
                 [@for="name"]
+                [@class="block mb-2 text-sm font-medium text-gray-900 dark:text-white required"]
+                [.="[trans]Name[/trans]"]
+            '
+        );
+    }
+
+    public function testLabelWithOptionalField(): void
+    {
+        $form = $this->factory->createNamed('name', TextType::class, null, ['required' => false]);
+        $html = $this->renderLabel($form->createView());
+
+        $this->assertMatchesXpath($html,
+            '/label
+                [@for="name"]
                 [@class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"]
                 [.="[trans]Name[/trans]"]
             '
@@ -36,7 +50,7 @@ final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertMatchesXpath($html,
             '/label
                 [@for="name"]
-                [@class="block mb-2 text-sm font-medium text-gray-900 dark:text-white my&class"]
+                [@class="block mb-2 text-sm font-medium text-gray-900 dark:text-white my&class required"]
                 [.="[trans]Name[/trans]"]
             '
         );
@@ -87,7 +101,7 @@ final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertMatchesXpath($html,
             '/label
                 [@for="name"]
-                [@class="block mb-2 text-sm font-medium text-red-600 dark:text-red-500"]
+                [@class="block mb-2 text-sm font-medium text-red-600 dark:text-red-500 required"]
                 [.="[trans]Name[/trans]"]
             '
         );
