@@ -24,7 +24,7 @@ final class TextLayoutTest extends AbstractFlowbiteLayoutTestCase
     {
         $form = $this->factory->createNamed('name', $classType, $data);
 
-        $this->assertWidgetMatchesXpath($form->createView(), [], sprintf(
+        $this->assertWidgetMatchesXpath($form->createView(), [], \sprintf(
             '/input
                 [@type="%s"]
                 [@name="name"]
@@ -44,7 +44,7 @@ final class TextLayoutTest extends AbstractFlowbiteLayoutTestCase
         $form->addError(new FormError('[trans]Error message[/trans]'));
         $form->submit([]);
 
-        $this->assertWidgetMatchesXpath($form->createView(), [], sprintf(
+        $this->assertWidgetMatchesXpath($form->createView(), [], \sprintf(
             '/input
                 [@type="%s"]
                 [@name="name"]
@@ -61,7 +61,7 @@ final class TextLayoutTest extends AbstractFlowbiteLayoutTestCase
         $form = $this->factory->createNamed('name', $classType, $data, ['disabled' => true]);
         $form->submit([]);
 
-        $this->assertWidgetMatchesXpath($form->createView(), [], sprintf(
+        $this->assertWidgetMatchesXpath($form->createView(), [], \sprintf(
             '/input
                 [@type="%s"]
                 [@name="name"]
