@@ -6,6 +6,7 @@ on:
 
 jobs:
   tests:
+    name: tests (PHP ${{ matrix.php-version }}) (Symfony ${{ matrix.symfony-version }})
 
     runs-on: ubuntu-latest
 
