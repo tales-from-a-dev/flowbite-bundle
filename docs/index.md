@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-This bundle requires **PHP 8.2+**, **Symfony 6.4+** and **Flowbite 1.6+**.
+This bundle requires **PHP 8.1+**, **Symfony 6.4+** and **Flowbite 1.6+**.
 
 ## Installation
 

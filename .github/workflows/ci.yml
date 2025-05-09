@@ -10,37 +10,33 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      max-parallel: 10
       fail-fast: false
       matrix:
-        php-version: [ '8.2', '8.3', '8.4' ]
+        php-version: [ '8.1', '8.2', '8.3', '8.4' ]
+        symfony-version: [ '6.4.*', '7.2.*' ]
+        exclude:
+          - php-version: '8.1'
+            symfony-version: '7.2.*'
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: php-setup
+      - name: 'Set up PHP'
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
           coverage: xdebug
 
-      - name: composer-validate
-        run: composer validate
-
-      - name: composer-cache
-        id: composer-cache
-        uses: actions/cache@v4
+      - name: 'Install Composer dependencies'
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony-version }}
+        uses: ramsey/composer-install@v3
         with:
-          path: vendor
-          key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.php-version }}-composer-
+          composer-options: '--optimize-autoloader'
 
-      - name: composer-install
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress --no-suggest
-
-      - name: php-cs-fixer
+      - name: 'Run PHP-CS-Fixer'
         run: PHP_CS_FIXER_IGNORE_ENV=1 composer cs
 
-      - name: phpunit
+      - name: 'Run PHPUnit'
         run: composer test
