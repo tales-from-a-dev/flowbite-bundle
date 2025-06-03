@@ -152,7 +152,7 @@
 {%- block checkbox_radio_label -%}
     {#- Do not display the label if widget is not defined in order to prevent double label rendering -#}
     {%- if widget is defined -%}
-        {%- if checked and form.parent.vars.valid == false -%}
+        {%- if checked and form.vars.valid == false -%}
             {%- set valid = false -%}
         {%- endif -%}
         {%- set label_attr_class = (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
@@ -182,7 +182,7 @@
 {% block switch_label -%}
     {#- Do not display the label if widget is not defined in order to prevent double label rendering -#}
     {%- if widget is defined -%}
-        {%- if checked and form.parent.vars.valid == false -%}
+        {%- if checked and form.vars.valid == false -%}
             {%- set valid = false -%}
         {%- endif -%}
         {%- set label_attr_class = (valid ? block('class_input_switch_label') : block('class_input_switch_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
