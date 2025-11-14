@@ -18,7 +18,7 @@ final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertMatchesXpath($html,
             '/label
                 [@for="name"]
-                [@class="block mb-2 text-sm font-medium text-gray-900 dark:text-white required"]
+                [@class="block mb-2.5 text-sm font-medium text-heading required"]
                 [.="[trans]Name[/trans]"]
             '
         );
@@ -32,7 +32,7 @@ final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertMatchesXpath($html,
             '/label
                 [@for="name"]
-                [@class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"]
+                [@class="block mb-2.5 text-sm font-medium text-heading"]
                 [.="[trans]Name[/trans]"]
             '
         );
@@ -50,7 +50,7 @@ final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertMatchesXpath($html,
             '/label
                 [@for="name"]
-                [@class="block mb-2 text-sm font-medium text-gray-900 dark:text-white my&class required"]
+                [@class="block mb-2.5 text-sm font-medium text-heading my&class required"]
                 [.="[trans]Name[/trans]"]
             '
         );
@@ -66,7 +66,7 @@ final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertMatchesXpath($html,
             '/p
                 [@id="name_help"]
-                [@class="mt-2 text-sm text-gray-500 dark:text-gray-400"]
+                [@class="mt-2.5 text-sm text-body"]
                 [.="[trans]Help text test![/trans]"]
             '
         );
@@ -85,7 +85,7 @@ final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertMatchesXpath($html,
             '/p
                 [@id="name_help"]
-                [@class="mt-2 text-sm text-gray-500 dark:text-gray-400 my&class"]
+                [@class="mt-2.5 text-sm text-body my&class"]
                 [.="[trans]Help text test![/trans]"]
             '
         );
@@ -101,7 +101,7 @@ final class SupportLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertMatchesXpath($html,
             '/label
                 [@for="name"]
-                [@class="block mb-2 text-sm font-medium text-red-600 dark:text-red-500 required"]
+                [@class="block mb-2.5 text-sm font-medium text-fg-danger-strong required"]
                 [.="[trans]Name[/trans]"]
             '
         );

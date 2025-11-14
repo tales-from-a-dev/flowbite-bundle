@@ -2,8 +2,8 @@
 
 ## Overriding CSS classes
 
-All used CSS classes are contained in [Twig blocks](https://github.com/talesfromadev/flowbite-bundle/blob/main/templates/form/default.twig#L244) 
-which allows to customize the theme very easily.
+All CSS classes are contained in [Twig blocks](https://github.com/talesfromadev/flowbite-bundle/blob/main/templates/form/default.twig#L244) 
+which allows customizing the theme very easily.
 
 Create a new theme in your `templates` directory and make it use the bundle `default` theme: 
 
@@ -13,7 +13,7 @@ Create a new theme in your `templates` directory and make it use the bundle `def
 {% use '@TalesFromADevFlowbite/form/default.html.twig' %}
 ```
 
-Now, just override the desire block with any Tailwind CSS class you want:
+Now, override the desired block with any Tailwind CSS class you want:
 
 ```php
 # templates/form/layout.html.twig
@@ -25,7 +25,7 @@ Now, just override the desire block with any Tailwind CSS class you want:
 {%- endblock class_submit %}
 ```
 
-Finally, don't forget to update your `twig` configuration to use your newly created template:
+Finally, update your `twig` configuration to use your newly created template:
 
 ```yaml
 # config/packages/twig.yaml
@@ -36,9 +36,9 @@ twig:
         - 'form/layout.html.twig'
 ```
 
-## Class block list
+## Class blocks list
 
-Here is a list of all available class block:
+Here is a list of all available class blocks:
 
 * Label
   * class_label
@@ -60,12 +60,13 @@ Here is a list of all available class block:
   * class_button
   * class_submit
 * Various
-  * class_time_separator
+  * class_input_group
   * class_addon
   * class_widget_addon_prepend
   * class_widget_addon_append
   * class_addon_prepend
   * class_addon_append
+  * class_time_separator
   * class_help_text
 * Error
   * class_label_error

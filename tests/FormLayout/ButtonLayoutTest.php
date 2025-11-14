@@ -16,8 +16,9 @@ final class ButtonLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertWidgetMatchesXpath($form->createView(), [],
             '/button
             [@type="button"]
+            [@id="name"]
             [@name="name"]
-            [@class="text-gray-900 bg-white font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 border border-gray-200 hover:text-blue-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"]
+            [@class="text-body bg-neutral-secondary-medium box-border border border-default-medium shadow-xs font-medium text-sm leading-5 rounded-base px-4 py-2.5 hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary focus:outline-none"]
             [
                 .="[trans]Name[/trans]"
             ]'

@@ -16,7 +16,7 @@ final class SwitchLayoutTest extends AbstractFlowbiteLayoutTestCase
 
         $this->assertWidgetMatchesXpath($form->createView(), [],
             '/label
-                [@class="relative inline-flex items-center cursor-pointer"]
+                [@class="inline-flex items-center cursor-pointer"]
                 [@for="name"]
                 [
                     ./input
@@ -26,9 +26,9 @@ final class SwitchLayoutTest extends AbstractFlowbiteLayoutTestCase
                         [@class="sr-only peer"]
                         [@value="1"]
                     /following-sibling::div
-                        [@class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 dark:border-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"]
+                        [@class="relative w-9 h-5 bg-neutral-quaternary rounded-full peer peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-soft peer-checked:bg-brand peer-checked:after:translate-x-full peer-checked:after:border-buffer after:content-[\'\'] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:size-4 after:transition-all rtl:peer-checked:after:-translate-x-full"]
                     /following-sibling::span
-                        [@class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"]
+                        [@class="select-none ms-2 text-sm font-medium text-heading"]
                         [.="[trans]Name[/trans]"]
                 ]
             '
@@ -45,7 +45,7 @@ final class SwitchLayoutTest extends AbstractFlowbiteLayoutTestCase
 
         $this->assertWidgetMatchesXpath($form->createView(), [],
             '/label
-                [@class="relative inline-flex items-center cursor-pointer foo bar"]
+                [@class="inline-flex items-center cursor-pointer foo bar"]
                 [@for="name"]
             '
         );
@@ -59,11 +59,11 @@ final class SwitchLayoutTest extends AbstractFlowbiteLayoutTestCase
 
         $this->assertWidgetMatchesXpath($form->createView(), [],
             '/label
-                [@class="relative inline-flex items-center cursor-pointer"]
+                [@class="inline-flex items-center cursor-pointer"]
                 [@for="name"]
                 [
                     ./span
-                        [@class="ml-2 text-sm font-medium text-red-600 dark:text-red-500"]
+                        [@class="select-none ms-2 text-sm font-medium text-fg-danger-strong"]
                         [.="[trans]Name[/trans]"]
                 ]
             '

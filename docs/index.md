@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-This bundle requires **PHP 8.1+**, **Symfony 6.4+** and **Flowbite 1.6+**.
+This bundle requires **PHP 8.1+**, **Symfony 6.4+** and **Flowbite 4.0+**.
 
 ## Installation
 
@@ -34,16 +34,26 @@ return [
 
 ### Configuring Tailwind CSS
 
-Update your Tailwind configuration file to include the `templates` folder of the bundle:
+Update your Tailwind configuration to include the `templates` folder of the bundle:
+
+```css
+/* assets/styles/app.css */
+
+@source "../../vendor/tales-from-a-dev/flowbite-bundle/templates/**/*.html.twig";
+```
+
+#### Legacy Tailwind CSS configuration
+
+If you are using the legacy Tailwind CSS configuration, add the following line to your `tailwind.config.js` file:
 
 ```js
 // tailwind.config.js
 
 module.exports = {
-  content: [
-    //...
-    "./vendor/tales-from-a-dev/flowbite-bundle/templates/**/*.html.twig"
-  ],
+    content: [
+        //...
+        "./vendor/tales-from-a-dev/flowbite-bundle/templates/**/*.html.twig"
+    ],
 }
 ```
 
@@ -60,9 +70,17 @@ twig:
         - '@TalesFromADevFlowbite/form/default.html.twig'
 ```
 
-## Run the watcher
+### Compiling assets
 
-Finally, run the following command to compile the front-end assets via Webpack:
+Finally, run one of the following commands to build your front-end assets:
+
+#### With [Tailwind bundle](https://symfony.com/bundles/TailwindBundle/current/index.html)
+
+```bash
+php bin/console tailwind:build 
+```
+
+#### With Webpack Encore
 
 ```bash
 # With npm

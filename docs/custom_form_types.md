@@ -1,6 +1,6 @@
 # Custom Form Types
 
-This bundle provide the following custom form types:
+This bundle provides the following custom form types:
 
 ## SwitchType
 

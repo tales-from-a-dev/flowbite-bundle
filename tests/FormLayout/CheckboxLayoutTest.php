@@ -16,16 +16,16 @@ final class CheckboxLayoutTest extends AbstractFlowbiteLayoutTestCase
 
         $this->assertWidgetMatchesXpath($form->createView(), [],
             '/div
-                [@class="flex items-center mr-4"]
+                [@class="flex items-center"]
                 [
                     ./input
                         [@type="checkbox"]
                         [@name="name"]
                         [@id="name"]
-                        [@class="rounded w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"]
+                        [@class="size-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft"]
                         [@value="1"]
                     /following-sibling::label
-                        [@class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"]
+                        [@class="select-none ms-2 text-sm font-medium text-heading"]
                         [.="[trans]Name[/trans]"]
                 ]
             '
@@ -43,7 +43,7 @@ final class CheckboxLayoutTest extends AbstractFlowbiteLayoutTestCase
                 [
                     ./label
                         [@for="name"]
-                        [@class="ml-2 text-sm font-medium text-red-600 dark:text-red-500"]
+                        [@class="select-none ms-2 text-sm font-medium text-fg-danger-strong"]
                         [.="[trans]Name[/trans]"]
                 ]
             '

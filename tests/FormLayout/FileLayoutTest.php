@@ -18,7 +18,7 @@ final class FileLayoutTest extends AbstractFlowbiteLayoutTestCase
                 [@type="file"]
                 [@name="name"]
                 [@id="name"]
-                [@class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"]
+                [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full shadow-xs cursor-pointer focus:ring-brand focus:border-brand placeholder:text-body"]
             '
         );
     }
