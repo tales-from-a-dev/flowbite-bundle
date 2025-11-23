@@ -19,6 +19,13 @@ jobs:
         exclude:
           - php-version: '8.1'
             symfony-version: '7.3.*'
+        include:
+          - php-version: '8.2'
+            symfony-version: '7.4.0-RC3'
+            minimum-stability: 'RC'
+          - php-version: '8.4'
+            symfony-version: '8.0.0-RC3'
+            minimum-stability: 'RC'
 
     steps:
       - uses: actions/checkout@v4
