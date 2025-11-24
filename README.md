@@ -25,10 +25,10 @@ The bulk of the documentation is stored in the [`docs`](docs/index.md) directory
 
 ## Screenshots
 
-| Default theme                                        | Dark theme                                        |
-|------------------------------------------------------|---------------------------------------------------|
-| ![Default theme](docs/screenshots/default.png)       | ![Default theme](docs/screenshots/dark.png)       |
-| ![Default theme](docs/screenshots/default_error.png) | ![Default theme](docs/screenshots/dark_error.png) |
+| Default theme                                                   | Dark theme                                                |
+|-----------------------------------------------------------------|-----------------------------------------------------------|
+| ![Default theme](docs/screenshots/default.png)                  | ![Dark theme](docs/screenshots/dark.png)                  |
+| ![Default theme with error](docs/screenshots/default_error.png) | ![Dark theme with error](docs/screenshots/dark_error.png) |
 
 ## Credits
 
