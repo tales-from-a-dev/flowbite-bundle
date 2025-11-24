@@ -24,7 +24,7 @@ final class BirthdayLayoutTest extends AbstractFlowbiteLayoutTestCase
                     ./select
                         [@name="birthday[month]"]
                         [@id="birthday_month"]
-                        [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-l-lg"]
+                        [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body rounded-none first-of-type:rounded-s-base first-of-type:border-e-0 last-of-type:rounded-e-base last-of-type:border-s-0"]
                         [
                             ./option
                                 [@value="2"]
@@ -33,7 +33,7 @@ final class BirthdayLayoutTest extends AbstractFlowbiteLayoutTestCase
                     /following-sibling::select
                         [@name="birthday[day]"]
                         [@id="birthday_day"]
-                        [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none"]
+                        [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body rounded-none first-of-type:rounded-s-base first-of-type:border-e-0 last-of-type:rounded-e-base last-of-type:border-s-0"]
                         [
                             ./option
                                 [@value="3"]
@@ -42,7 +42,7 @@ final class BirthdayLayoutTest extends AbstractFlowbiteLayoutTestCase
                     /following-sibling::select
                         [@name="birthday[year]"]
                         [@id="birthday_year"]
-                        [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-r-lg"]
+                        [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body rounded-none first-of-type:rounded-s-base first-of-type:border-e-0 last-of-type:rounded-e-base last-of-type:border-s-0"]
                         [
                             ./option
                                 [@value="2000"]
@@ -66,7 +66,7 @@ final class BirthdayLayoutTest extends AbstractFlowbiteLayoutTestCase
                 [@type="date"]
                 [@name="birthday"]
                 [@id="birthday"]
-                [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body"]
                 [@value="2000-02-03"]
                 [@required="required"]
             '

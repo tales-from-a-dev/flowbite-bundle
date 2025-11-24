@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
+use Symfony\Component\Form\FormError;
 use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
 final class PercentLayoutTest extends AbstractFlowbiteLayoutTestCase
@@ -23,10 +24,10 @@ final class PercentLayoutTest extends AbstractFlowbiteLayoutTestCase
                         [@type="text"]
                         [@name="name"]
                         [@id="name"]
-                        [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-l-lg"]
+                        [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body rounded-e-none"]
                         [@value="50"]
                     /following-sibling::span
-                        [@class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600 border-l-0 rounded-r-md"]
+                        [@class="inline-flex items-center px-3 shadow-xs text-sm text-body bg-neutral-tertiary border-y border-default-medium rounded-e-base border-e"]
                         [.="%"]
                 ]
             '
@@ -45,8 +46,33 @@ final class PercentLayoutTest extends AbstractFlowbiteLayoutTestCase
                 [@type="text"]
                 [@name="name"]
                 [@id="name"]
-                [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body"]
                 [@value="50"]
+            '
+        );
+    }
+
+    public function testPercentError(): void
+    {
+        $form = $this->factory->createNamed('name', PercentType::class, 0.5, [
+            'rounding_mode' => \NumberFormatter::ROUND_CEILING,
+        ]);
+        $form->addError(new FormError('[trans]Error message[/trans]'));
+        $form->submit([]);
+
+        $this->assertWidgetMatchesXpath($form->createView(), [],
+            '/div
+                [@class="flex"]
+                [
+                    ./input
+                        [@type="text"]
+                        [@name="name"]
+                        [@id="name"]
+                        [@class="border text-sm rounded-base block w-full px-3 py-2.5 shadow-xs rounded-e-none bg-danger-soft border-danger-subtle text-fg-danger-strong focus:ring-danger focus:border-danger placeholder:text-fg-danger-strong"]
+                    /following-sibling::span
+                        [@class="inline-flex items-center px-3 shadow-xs text-sm text-body bg-neutral-tertiary border-y border-default-medium rounded-e-base border-e"]
+                        [.="%"]
+                ]
             '
         );
     }

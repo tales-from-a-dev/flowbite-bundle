@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TalesFromADev\FlowbiteBundle\Tests\FormLayout;
 
 use Symfony\Component\Form\Extension\Core\Type\WeekType;
+use Symfony\Component\Form\FormError;
 use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
 final class WeekLayoutTest extends AbstractFlowbiteLayoutTestCase
@@ -21,7 +22,7 @@ final class WeekLayoutTest extends AbstractFlowbiteLayoutTestCase
                 [@type="week"]
                 [@name="name"]
                 [@id="name"]
-                [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body"]
                 [@value="1970-W01"]
                 [@required="required"]
             '
@@ -44,7 +45,7 @@ final class WeekLayoutTest extends AbstractFlowbiteLayoutTestCase
                     ./select
                         [@id="name_year"]
                         [@name="name[year]"]
-                        [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                        [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body"]
                         [
                             ./option
                                 [@value="'.$data['year'].'"]
@@ -53,7 +54,7 @@ final class WeekLayoutTest extends AbstractFlowbiteLayoutTestCase
                     /following-sibling::select
                         [@id="name_week"]
                         [@name="name[week]"]
-                        [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                        [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body"]
                         [
                             ./option
                                 [@value="'.$data['week'].'"]
@@ -80,16 +81,35 @@ final class WeekLayoutTest extends AbstractFlowbiteLayoutTestCase
                         [@type="number"]
                         [@id="name_year"]
                         [@name="name[year]"]
-                        [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                        [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body"]
                         [@value="2000"]
                     /following-sibling::input
                         [@type="number"]
                         [@id="name_week"]
                         [@name="name[week]"]
-                        [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"]
+                        [@class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body"]
                         [@value="1"]
                 ]
                 [count(./input)=2]
+            '
+        );
+    }
+
+    public function testWeekError(): void
+    {
+        $form = $this->factory->createNamed('name', WeekType::class, '1970-W01', [
+            'input' => 'string',
+            'widget' => 'single_text',
+        ]);
+        $form->addError(new FormError('[trans]Error message[/trans]'));
+        $form->submit([]);
+
+        $this->assertWidgetMatchesXpath($form->createView(), [],
+            '/input
+                [@type="week"]
+                [@name="name"]
+                [@id="name"]
+                [@class="border text-sm rounded-base block w-full px-3 py-2.5 shadow-xs bg-danger-soft border-danger-subtle text-fg-danger-strong focus:ring-danger focus:border-danger placeholder:text-fg-danger-strong"]
             '
         );
     }

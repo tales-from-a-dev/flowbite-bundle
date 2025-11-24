@@ -16,8 +16,9 @@ final class SubmitLayoutTest extends AbstractFlowbiteLayoutTestCase
         $this->assertWidgetMatchesXpath($form->createView(), [],
             '/button
             [@type="submit"]
+            [@id="name"]
             [@name="name"]
-            [@class="text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"]
+            [@class="text-white bg-brand box-border border border-transparent shadow-xs font-medium text-sm leading-5 rounded-base px-4 py-2.5 hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium focus:outline-none"]
             [
                 .="[trans]Name[/trans]"
             ]'

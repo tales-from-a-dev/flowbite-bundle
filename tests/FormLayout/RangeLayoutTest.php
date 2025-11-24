@@ -18,7 +18,7 @@ final class RangeLayoutTest extends AbstractFlowbiteLayoutTestCase
                 [@type="range"]
                 [@name="name"]
                 [@id="name"]
-                [@class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"]
+                [@class="w-full h-2 bg-neutral-quaternary rounded-full appearance-none cursor-pointer"]
                 [@value="10"]
             '
         );

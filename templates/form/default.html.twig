@@ -13,32 +13,33 @@
         {%- elseif type == 'file' -%}
             {%- set attr_class = block('class_input_file') -%}
         {%- endif -%}
-        {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
+        {%- set attr_class = attr_class ~ ' ' ~ attr.class|default('') -%}
+        {%- set attr = attr|merge({'class': attr_class|trim|tailwind_merge}) -%}
         {{- parent() -}}
     {%- endif -%}
 {%- endblock form_widget_simple -%}
 
 {%- block textarea_widget -%}
-    {%- set attr_class = attr_class|default(block('class_textarea')) -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
+    {%- set attr_class = block('class_textarea') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({'class': attr_class|trim|tailwind_merge}) -%}
     {{- parent() -}}
 {%- endblock textarea_widget -%}
 
 {%- block choice_widget_collapsed -%}
-    {%- set attr_class = attr_class|default(block('class_select')) -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
+    {%- set attr_class = block('class_select') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({'class': attr_class|trim|tailwind_merge}) -%}
     {{- parent() -}}
 {%- endblock choice_widget_collapsed -%}
 
 {%- block checkbox_widget -%}
-    {%- set attr_class = attr_class|default(block('class_input_checkbox')) -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
+    {%- set attr_class = block('class_input_checkbox') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({'class': attr_class|trim|tailwind_merge}) -%}
     {{- form_label(form, null, { widget: parent() }) -}}
 {%- endblock checkbox_widget -%}
 
 {%- block radio_widget -%}
-    {%- set attr_class = attr_class|default(block('class_input_radio')) -%}
-    {%- set attr = attr|merge({'class': (attr_class ~ ' ' ~ attr.class|default(''))|trim}) -%}
+    {%- set attr_class = block('class_input_radio') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({'class': attr_class|trim|tailwind_merge}) -%}
     {{- form_label(form, null, { widget: parent() }) -}}
 {%- endblock radio_widget -%}
 
@@ -52,9 +53,9 @@
     {%- set append = not (money_pattern ends with '}}') -%}
     {%- if prepend or append -%}
         <div class="flex">
-            {%- set attr_class = block('class_input_text') ~ ' ' ~ block('class_widget_addon_prepend') -%}
+            {%- set attr_class = block('class_input_text') ~ ' ' ~ block('class_widget_addon_append') -%}
             {%- if prepend -%}
-                {%- set attr_class = block('class_input_text') ~ ' ' ~ block('class_widget_addon_append') -%}
+                {%- set attr_class = block('class_input_text') ~ ' ' ~ block('class_widget_addon_prepend') -%}
                 <span class="{{ block('class_addon') ~ ' ' ~ block('class_addon_prepend') }}">{{ money_pattern|form_encode_currency }}</span>
             {%- endif -%}
             {% with { attr_class: attr_class } %}{{- block('form_widget_simple') -}}{% endwith %}
@@ -69,7 +70,7 @@
 
 {% block percent_widget -%}
     {%- if symbol -%}
-        {%- set attr_class = block('class_input_text') ~ ' ' ~ block('class_widget_addon_prepend') -%}
+        {%- set attr_class = block('class_input_text') ~ ' ' ~ block('class_widget_addon_append') -%}
         <div class="flex">
             {%- with { attr_class: attr_class } -%}{{- block('form_widget_simple') -}}{%- endwith -%}
             <span class="{{ block('class_addon') ~ ' ' ~ block('class_addon_append') }}">{{ symbol|default('%') }}</span>
@@ -90,9 +91,9 @@
         {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
             {{- date_pattern|replace({
-                '{{ year }}':  form_widget(form.year, { attr: { class: (block('class_widget_addon_append') ~ ' ' ~ attr_class_error|trim|tailwind_merge) }}),
-                '{{ month }}': form_widget(form.month, { attr: { class: (block('class_widget_addon_prepend') ~ ' ' ~ attr_class_error|trim|tailwind_merge) }}),
-                '{{ day }}':   form_widget(form.day, { attr: { class: ('rounded-none' ~ attr_class_error)|trim|tailwind_merge }}),
+                '{{ year }}':  form_widget(form.year, { attr: { 'class': block('class_input_group') ~ ' ' ~ attr_class_error|trim|tailwind_merge }}),
+                '{{ month }}': form_widget(form.month, { attr: { 'class': block('class_input_group') ~ ' ' ~ attr_class_error|trim|tailwind_merge }}),
+                '{{ day }}':   form_widget(form.day, { attr: { 'class': block('class_input_group') ~ ' ' ~ attr_class_error|trim|tailwind_merge }}),
             })|raw -}}
         </div>
     {%- endif -%}
@@ -108,27 +109,29 @@
             {%- set attr_class_error = ' ' ~ block('class_input_error') -%}
         {%- endif -%}
         <div {{ block('widget_container_attributes') }}>
-            {{- form_widget(form.hour, { attr: { class: ((with_minutes or with_seconds ? block('class_widget_addon_prepend') : '') ~ attr_class_error)|trim|tailwind_merge }}) -}}
+            {{- form_widget(form.hour, { attr: { 'class': ((with_minutes or with_seconds ? block('class_widget_addon_append') : '') ~ ' ' ~ attr_class_error)|trim|tailwind_merge }}) -}}
             {%- if with_minutes -%}
                 <span class="{{ block('class_time_separator') }}">:</span>
-                {{- form_widget(form.minute, { attr: { class: ((with_seconds ? 'rounded-none' : block('class_widget_addon_append')) ~ attr_class_error|trim|tailwind_merge) }}) -}}
+                {{- form_widget(form.minute, { attr: { 'class': ((with_seconds ? 'rounded-none' : block('class_widget_addon_prepend')) ~ ' ' ~ attr_class_error|trim|tailwind_merge) }}) -}}
             {%- endif -%}
             {%- if with_seconds -%}
                 <span class="{{ block('class_time_separator') }}">:</span>
-                {{- form_widget(form.second, { attr: { class: (block('class_widget_addon_append') ~ attr_class_error)|trim|tailwind_merge }}) -}}
+                {{- form_widget(form.second, { attr: { 'class': (block('class_widget_addon_prepend') ~ ' ' ~ attr_class_error)|trim|tailwind_merge }}) -}}
             {%- endif -%}
         </div>
     {%- endif -%}
 {%- endblock time_widget -%}
 
 {%- block button_widget -%}
-    {%- set attr = attr|merge({'class': (attr.class|default(block('class_button')))|trim}) -%}
+    {%- set attr_class = block('class_button') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({'class': attr_class|trim|tailwind_merge}) -%}
     {{- parent() -}}
 {%- endblock button_widget %}
 
 {%- block submit_widget -%}
-    {%- set attr = attr|merge({'class': (attr.class|default(block('class_submit')))|trim}) -%}
-    {{- parent() -}}
+    {%- set attr_class = block('class_submit') ~ ' ' ~ attr.class|default('') -%}
+    {%- set attr = attr|merge({'class': attr_class|trim|tailwind_merge}) -%}
+    {{- block('submit_widget', 'form_div_layout.html.twig') -}}
 {%- endblock submit_widget %}
 
 {# Labels #}
@@ -152,15 +155,23 @@
 {%- block checkbox_radio_label -%}
     {#- Do not display the label if widget is not defined in order to prevent double label rendering -#}
     {%- if widget is defined -%}
-        {%- if checked and form.parent.vars.valid == false -%}
-            {%- set valid = false -%}
+        {%- if checked -%}
+            {%- if form.parent is rootform -%}
+                {%- if form.vars.valid == false -%}
+                    {%- set valid = false -%}
+                {%- endif -%}
+            {%- else -%}
+                {%- if form.parents.vars.valid == false -%}
+                    {%- set valid = false -%}
+                {%- endif -%}
+            {%- endif -%}
         {%- endif -%}
         {%- set label_attr_class = (valid ? block('class_input_radio_label') : block('class_input_radio_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
         {%- set label_attr = label_attr|merge({'class': label_attr_class|trim|tailwind_merge}) -%}
         {%- if not compound -%}
             {% set label_attr = label_attr|merge({'for': id}) %}
         {%- endif -%}
-        <div class="flex items-center mr-4">
+        <div class="flex items-center">
             {{ widget|raw }}
             <label{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}>
                 {%- if label is not same as(false) -%}
@@ -182,8 +193,16 @@
 {% block switch_label -%}
     {#- Do not display the label if widget is not defined in order to prevent double label rendering -#}
     {%- if widget is defined -%}
-        {%- if checked and form.parent.vars.valid == false -%}
-            {%- set valid = false -%}
+        {%- if checked -%}
+            {%- if form.parent is rootform -%}
+                {%- if form.vars.valid == false -%}
+                    {%- set valid = false -%}
+                {%- endif -%}
+            {%- else -%}
+                {%- if form.parents.vars.valid == false -%}
+                    {%- set valid = false -%}
+                {%- endif -%}
+            {%- endif -%}
         {%- endif -%}
         {%- set label_attr_class = (valid ? block('class_input_switch_label') : block('class_input_switch_label_error')) ~ ' ' ~ label_attr.class|default('') -%}
         {%- set label_container_attr_class = block('class_input_switch_label_container') ~ ' ' ~ label_container_attr.class|default('') -%}
@@ -208,8 +227,8 @@
 
 {% block form_help -%}
     {%- if help is not empty -%}
-        {%- set help_attr_class = (block('class_help_text') ~ ' '~ help_attr.class|default(''))|trim -%}
-        {%- set help_attr = help_attr|merge({'class': help_attr_class}) -%}
+        {%- set help_attr_class = block('class_help_text') ~ ' ' ~ help_attr.class|default('') -%}
+        {%- set help_attr = help_attr|merge({'class': help_attr_class|trim|tailwind_merge}) -%}
         <p id="{{ id }}_help"{% with { attr: help_attr } %}{{ block('attributes') }}{% endwith %}>
             {{- block('form_help_content') -}}
         </p>
@@ -219,7 +238,7 @@
 {# Rows #}
 
 {%- block form_row -%}
-    {%- set row_attr = row_attr|merge({'class': (row_attr.class|default('mb-3'))|trim}) -%}
+    {%- set row_attr = row_attr|merge({'class': (row_attr.class|default('mb-3'))|trim|tailwind_merge}) -%}
     {%- set widget_attr = {} -%}
     {%- if help is not empty -%}
         {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
@@ -259,11 +278,11 @@
 {# Class #}
 
 {% block class_label -%}
-    block mb-2 text-sm font-medium text-gray-900 dark:text-white
+    block mb-2.5 text-sm font-medium text-heading
 {%- endblock class_label %}
 
 {% block class_input_radio_label -%}
-    ml-2 text-sm font-medium text-gray-900 dark:text-gray-300
+    select-none ms-2 text-sm font-medium text-heading
 {%- endblock class_input_radio_label %}
 
 {% block class_input_switch_label -%}
@@ -271,31 +290,31 @@
 {%- endblock class_input_switch_label %}
 
 {% block class_input_switch_label_container -%}
-    relative inline-flex items-center cursor-pointer
+    inline-flex items-center cursor-pointer
 {%- endblock class_input_switch_label_container %}
 
 {% block class_input_text -%}
-    text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500
+    bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs focus:ring-brand focus:border-brand placeholder:text-body
 {%- endblock class_input_text %}
 
 {% block class_input_range -%}
-    w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700
+    w-full h-2 bg-neutral-quaternary rounded-full appearance-none cursor-pointer
 {%- endblock class_input_range %}
 
 {% block class_input_file -%}
-    block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+    bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base block w-full shadow-xs cursor-pointer focus:ring-brand focus:border-brand placeholder:text-body
 {%- endblock class_input_file %}
 
 {% block class_input_radio -%}
-    w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600
+    size-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full border border-default appearance-none checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle
 {%- endblock class_input_radio %}
 
 {% block class_input_checkbox -%}
-    rounded {{ block('class_input_radio') }}
+    size-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft
 {%- endblock class_input_checkbox %}
 
 {% block class_input_switch -%}
-    relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 dark:border-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600
+    relative w-9 h-5 bg-neutral-quaternary rounded-full peer peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-soft peer-checked:bg-brand peer-checked:after:translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:size-4 after:transition-all rtl:peer-checked:after:-translate-x-full
 {%- endblock class_input_switch %}
 
 {% block class_select -%}
@@ -307,47 +326,51 @@
 {%- endblock class_textarea %}
 
 {% block class_button -%}
-    text-gray-900 bg-white font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 border border-gray-200 hover:text-blue-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700
+    text-body bg-neutral-secondary-medium box-border border border-default-medium shadow-xs font-medium text-sm leading-5 rounded-base px-4 py-2.5 hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary focus:outline-none
 {%- endblock class_button %}
 
 {% block class_submit -%}
-    text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
+    text-white bg-brand box-border border border-transparent shadow-xs font-medium text-sm leading-5 rounded-base px-4 py-2.5 hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium focus:outline-none
 {%- endblock class_submit %}
 
-{% block class_time_separator -%}
-    inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-x-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600
-{%- endblock class_time_separator %}
+{% block class_input_group -%}
+    rounded-none first-of-type:rounded-s-base first-of-type:border-e-0 last-of-type:rounded-e-base last-of-type:border-s-0
+{%- endblock class_input_group %}
 
 {% block class_addon -%}
-    inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600
+    inline-flex items-center px-3 shadow-xs text-sm text-body bg-neutral-tertiary border-y border-default-medium
 {%- endblock class_addon %}
 
 {% block class_widget_addon_prepend -%}
-    rounded-none rounded-l-lg
+    rounded-s-none
 {%- endblock class_widget_addon_prepend %}
 
 {% block class_widget_addon_append -%}
-    rounded-none rounded-r-lg
+    rounded-e-none
 {%- endblock class_widget_addon_append %}
 
 {% block class_addon_prepend -%}
-    border-r-0 rounded-l-md
+    rounded-s-base border-s
 {%- endblock class_addon_prepend %}
 
 {% block class_addon_append -%}
-    border-l-0 rounded-r-md
+    rounded-e-base border-e
 {%- endblock class_addon_append %}
 
+{% block class_time_separator -%}
+    {{ block('class_addon') }}
+{%- endblock class_time_separator %}
+
 {% block class_help_text -%}
-    mt-2 text-sm text-gray-500 dark:text-gray-400
+    mt-2.5 text-sm text-body
 {%- endblock class_help_text %}
 
 {% block class_label_error -%}
-    block mb-2 text-sm font-medium text-red-600 dark:text-red-500
+    block mb-2.5 text-sm font-medium text-fg-danger-strong
 {%- endblock class_label_error %}
 
 {% block class_input_radio_label_error -%}
-    ml-2 text-sm font-medium text-red-600 dark:text-red-500
+    select-none ms-2 text-sm font-medium text-fg-danger-strong
 {%- endblock class_input_radio_label_error %}
 
 {% block class_input_switch_label_error -%}
@@ -355,13 +378,13 @@
 {%- endblock class_input_switch_label_error %}
 
 {% block class_input_error -%}
-    bg-red-50 border-red-500 text-red-900 placeholder-red-700 dark:bg-red-100 dark:border-red-500 dark:text-red-500 dark:placeholder-red-500 focus:z-10 focus:ring-red-500 focus:border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500
+    bg-danger-soft border-danger-subtle text-fg-danger-strong focus:ring-danger focus:border-danger placeholder:text-fg-danger-strong
 {%- endblock class_input_error %}
 
 {% block class_text_error -%}
-    mt-2 text-sm text-red-600 dark:text-red-500
+    mt-2.5 text-sm text-fg-danger-strong
 {%- endblock class_text_error %}
 
 {% block class_input_disabled -%}
-    disabled:bg-gray-100 disabled:border-gray-300 disabled:cursor-not-allowed dark:disabled:text-gray-400
+    disabled:text-fg-disabled disabled:cursor-not-allowed
 {%- endblock class_input_disabled %}
