@@ -25,7 +25,7 @@ final class TimeLayoutTest extends AbstractFlowbiteLayoutTestCase
                 ./select
                     [@name="name[hour]"]
                     [@id="name_hour"]
-                    [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-l-lg"]
+                    [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-e-none"]
                     [not(@size)]
                     [
                         ./option
@@ -34,11 +34,11 @@ final class TimeLayoutTest extends AbstractFlowbiteLayoutTestCase
                     ]
                     [count(./option)>23]
                 /following-sibling::span
-                    [@class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-x-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"]
+                    [@class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border-y border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"]
                 /following-sibling::select
                     [@name="name[minute]"]
                     [@id="name_minute"]
-                    [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-r-lg"]
+                    [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-s-none"]
                     [not(@size)]
                     [
                         ./option
@@ -67,7 +67,7 @@ final class TimeLayoutTest extends AbstractFlowbiteLayoutTestCase
                 ./select
                     [@name="name[hour]"]
                     [@id="name_hour"]
-                    [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-l-lg"]
+                    [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-e-none"]
                     [not(@size)]
                     [
                         ./option
@@ -77,7 +77,7 @@ final class TimeLayoutTest extends AbstractFlowbiteLayoutTestCase
                     ]
                     [count(./option)>23]
                 /following-sibling::span
-                    [@class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-x-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"]
+                    [@class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border-y border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"]
                 /following-sibling::select
                     [@name="name[minute]"]
                     [@id="name_minute"]
@@ -90,11 +90,11 @@ final class TimeLayoutTest extends AbstractFlowbiteLayoutTestCase
                     ]
                     [count(./option)>59]
                 /following-sibling::span
-                    [@class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-x-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"]
+                    [@class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border-y border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"]
                 /following-sibling::select
                     [@name="name[second]"]
                     [@id="name_second"]
-                    [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-r-lg"]
+                    [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-s-none"]
                     [not(@size)]
                     [
                         ./option
@@ -122,15 +122,15 @@ final class TimeLayoutTest extends AbstractFlowbiteLayoutTestCase
                 ./input
                     [@name="name[hour]"]
                     [@id="name_hour"]
-                    [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-l-lg"]
+                    [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-e-none"]
                     [@value="04"]
                     [@required="required"]
                 /following-sibling::span
-                    [@class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-x-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"]
+                    [@class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border-y border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"]
                 /following-sibling::input
                     [@name="name[minute]"]
                     [@id="name_minute"]
-                    [@class="text-gray-900 bg-gray-50 text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-none rounded-r-lg"]
+                    [@class="text-gray-900 bg-gray-50 rounded-lg text-sm block w-full p-2.5 border border-gray-300 focus:z-10 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-s-none"]
                     [@value="05"]
                     [@required="required"]
             ]
