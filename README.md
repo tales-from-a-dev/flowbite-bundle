@@ -7,7 +7,7 @@
 
 # Flowbite bundle
 
-This bundle provide a Symfony form theme for [Flowbite](https://flowbite.com/).
+This bundle provides a Symfony form theme for [Flowbite](https://flowbite.com/).
 
 ## Documentation
 
