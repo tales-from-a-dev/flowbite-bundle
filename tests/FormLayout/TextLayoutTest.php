@@ -13,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormError;
 use TalesFromADev\FlowbiteBundle\Tests\AbstractFlowbiteLayoutTestCase;
 
@@ -96,7 +95,6 @@ final class TextLayoutTest extends AbstractFlowbiteLayoutTestCase
         yield NumberType::class => [NumberType::class, 1234.56, 'text'];
         yield PasswordType::class => [PasswordType::class, null, 'password'];
         yield SearchType::class => [SearchType::class, '1', 'search'];
-        yield UrlType::class => [UrlType::class, 'https://example.com', 'text'];
         yield TelType::class => [TelType::class, '0123456789', 'tel'];
         yield ColorType::class => [ColorType::class, '#ffffff', 'color'];
     }
